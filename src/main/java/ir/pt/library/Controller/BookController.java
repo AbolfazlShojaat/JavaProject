@@ -9,49 +9,42 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/book")
 public class BookController {
-    @GetMapping
-    public ResponseEntity book() throws Exception {
+
+    @PostMapping(value = "/add")
+    public ResponseEntity addBook(@RequestBody Book book) throws Exception {
+        book.setId(book.getId() + 1);
+        return ResponseEntity.ok().body(book);
+    }
+
+    @GetMapping(value = "/select")
+    public ResponseEntity selectBook() throws Exception {
         List<Book> listBook = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            Book book= new Book(i+1,"arabi","tarikh o adabiat", 192,new Date(01/01/1400));
+            Book book = new Book(i + 1, "arabi", "tarikh o adabiat", 192, new Date(01 / 01 / 1400));
             listBook.add(book);
         }
         return ResponseEntity.ok(listBook);
     }
 
-//    @PostMapping
-//    public ResponseEntity book1() throws Exception {
-//        List<Book> listBook = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            Book book = new Book(i + 10);
-//            book.setName("تاریخ");
-//            book.setPrice(150000);
-//            listBook.add(book);
-//        }
-//        return ResponseEntity.ok(listBook);
-//    }
-//    @PutMapping
-//    public ResponseEntity book2() throws Exception {
-//        List<Book> listBook = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            Book book = new Book(i + 10);
-//            book.setName("ریاضی");
-//            book.setPrice(75000);
-//            listBook.add(book);
-//        }
-//        return ResponseEntity.ok(listBook);
-//    }
-//    @DeleteMapping
-//    public ResponseEntity book3() throws Exception {
-//        List<Book> listBook = new ArrayList<>();
-//        for (int i = 0; i < 4; i++) {
-//            Book book = new Book(i + 10);
-//            book.setName("قرآن");
-//            book.setPrice(75000);
-//            listBook.add(book);
-//        }
-//        return ResponseEntity.ok(listBook);
-//    }
+    @GetMapping(value = "/search")
+    public ResponseEntity searchBook() throws Exception {
+        Book book = new Book(2, "adabit", "tarikh o adabiat", 784, new Date(02 / 02 / 1400));
+        return ResponseEntity.ok(book);
+    }
+
+
+    @PutMapping(value = "/update")
+    public ResponseEntity updateBook(@RequestBody Book book) throws Exception {
+        book.setId(book.getId() + 1);
+        return ResponseEntity.ok(book);
+    }
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity deleteBook(@RequestBody Book book) throws Exception {
+        book.setId(book.getId() + 1);
+        return ResponseEntity.ok(book);
+    }
 }
 
