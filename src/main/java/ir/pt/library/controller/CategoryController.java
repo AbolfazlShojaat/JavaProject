@@ -37,7 +37,6 @@ public class CategoryController {
     public ResponseEntity deleteCategory(@RequestBody Category category) throws Exception {
         category.setId(category.getId() + 1);
         return ResponseEntity.ok(category);
-
     }
 
 }
