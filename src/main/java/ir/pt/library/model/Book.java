@@ -1,4 +1,4 @@
-package ir.pt.library.Model;
+package ir.pt.library.model;
 
 import java.util.Date;
 

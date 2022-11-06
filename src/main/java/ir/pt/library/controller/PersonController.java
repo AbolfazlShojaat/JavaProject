@@ -1,6 +1,6 @@
-package ir.pt.library.Controller;
+package ir.pt.library.controller;
 
-import ir.pt.library.Model.Person;
+import ir.pt.library.model.Person;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
