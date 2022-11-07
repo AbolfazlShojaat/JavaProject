@@ -1,6 +1,9 @@
 package ir.pt.library.controller;
 
 import ir.pt.library.model.Book;
+import ir.pt.library.model.Category;
+import ir.pt.library.service.BookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,25 +15,24 @@ import java.util.List;
 @RequestMapping(value = "/book")
 public class BookController {
 
+    @Autowired
+    private BookService bookService;
+
     @PostMapping(value = "/add")
     public ResponseEntity addBook(@RequestBody Book book) throws Exception {
-        book.setId(book.getId() + 1);
-        return ResponseEntity.ok().body(book);
+//        bookService.create(book);
+        return ResponseEntity.ok(bookService.create(book));
     }
 
     @GetMapping(value = "/select")
     public ResponseEntity selectBook() throws Exception {
-        List<Book> listBook = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            Book book = new Book(i + 1, "arabi", "tarikh o adabiat", 192, new Date(01 / 01 / 1400));
-            listBook.add(book);
-        }
-        return ResponseEntity.ok(listBook);
+        return ResponseEntity.ok(bookService.getList());
     }
 
     @GetMapping(value = "/search")
     public ResponseEntity searchBook() throws Exception {
-        Book book = new Book(2, "adabit", "tarikh o adabiat", 784, new Date(02 / 02 / 1400));
+        Book book = new Book(2, "adabit", 784, new Date(02 / 02 / 1400));
+        book.setCategory(new Category(1, "Arabi"));
         return ResponseEntity.ok(book);
     }
 
