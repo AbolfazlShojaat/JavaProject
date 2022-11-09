@@ -1,19 +1,18 @@
 package ir.pt.library.service;
 
-import ir.pt.library.model.Book;
-import ir.pt.library.model.Person;
+import ir.pt.library.model.PersonDTO;
 
 import java.util.List;
 
 public interface PersonService {
 
-    Person create(Person person);
+    PersonDTO create(PersonDTO person);
 
-    Person update(Person person);
+    PersonDTO update(PersonDTO person);
 
     boolean delete(int id);
 
-    Person get(int id);
+    PersonDTO get(int id);
 
-    List<Person> getList();
+    List<PersonDTO> getList();
 }

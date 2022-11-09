@@ -1,12 +1,12 @@
 package ir.pt.library.model;
 
-public class Person {
+public class PersonDTO {
     private int id;
     private String firstName;
     private String lastName;
     private int nationalCode;
 
-    public Person(int id, String firstName, String lastName, int nationalCode) {
+    public PersonDTO(int id, String firstName, String lastName, int nationalCode) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

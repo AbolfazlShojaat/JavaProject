@@ -1,18 +1,18 @@
 package ir.pt.library.service.Impl;
 
-import ir.pt.library.model.Person;
+import ir.pt.library.model.PersonDTO;
 import ir.pt.library.service.PersonService;
 
 import java.util.List;
 
 public class PersonServiceImpl implements PersonService {
     @Override
-    public Person create(Person person) {
+    public PersonDTO create(PersonDTO person) {
         return null;
     }
 
     @Override
-    public Person update(Person person) {
+    public PersonDTO update(PersonDTO person) {
         return null;
     }
 
@@ -22,12 +22,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public Person get(int id) {
+    public PersonDTO get(int id) {
         return null;
     }
 
     @Override
-    public List<Person> getList() {
+    public List<PersonDTO> getList() {
         return null;
     }
 }

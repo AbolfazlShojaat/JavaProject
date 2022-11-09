@@ -2,16 +2,16 @@ package ir.pt.library.model;
 
 import java.util.Date;
 
-public class Book {
+public class BookDTO {
     private int id;
     private String name;
     //    private String Category;
-    Category category = new Category();
+    CategoryDTO category = new CategoryDTO();
     private int shabak;
     private Date printData;
 
 
-    public Book(int id, String name /*String category*/, int shabak, Date printData) {
+    public BookDTO(int id, String name /*String category*/, int shabak, Date printData) {
         this.id = id;
         this.name = name;
 //        Category = category;
@@ -43,13 +43,13 @@ public class Book {
 //        Category = category;
 //    }
 
-    public Category getCategory() {
+    public CategoryDTO getCategory() {
         category.getId();
         category.getName();
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(CategoryDTO category) {
         this.category = category;
     }
 
