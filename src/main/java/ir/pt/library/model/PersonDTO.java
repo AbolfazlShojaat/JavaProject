@@ -6,6 +6,15 @@ public class PersonDTO {
     private String lastName;
     private int nationalCode;
 
+    public PersonDTO() {
+    }
+
+    public PersonDTO(String firstName, String lastName, int nationalCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationalCode = nationalCode;
+    }
+
     public PersonDTO(int id, String firstName, String lastName, int nationalCode) {
         this.id = id;
         this.firstName = firstName;
