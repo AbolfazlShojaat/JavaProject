@@ -1,18 +1,17 @@
 package ir.pt.library.service;
 
-import ir.pt.library.model.Category;
+import ir.pt.library.model.CategoryDTO;
 
 import java.util.List;
 
 public interface CategoryService {
+    CategoryDTO create(CategoryDTO model);
 
-    Category create(Category category);
+    CategoryDTO update(CategoryDTO model);
 
-    Category update(Category category);
+    boolean delete(Integer id);
 
-    boolean delete(int id);
+    CategoryDTO get(Integer id);
 
-    Category get(int id);
-
-    List<Category> getList();
+    List<CategoryDTO> getAll();
 }

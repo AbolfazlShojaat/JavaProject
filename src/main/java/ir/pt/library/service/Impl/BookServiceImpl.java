@@ -1,6 +1,7 @@
 package ir.pt.library.service.Impl;
 
-import ir.pt.library.model.Book;
+import ir.pt.library.model.BookDTO;
+import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.BookService;
 import org.springframework.stereotype.Service;
 
@@ -11,33 +12,50 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
+//    @Autowired
+//    private BookRepo bookRepo;
+//
+//    @Override
+//    public Book save(Book model) {
+//        ir.pt.library.entity.Book book
+//        return null;
+//    }
+
     @Override
-    public Book create(Book book) {
+    public BookDTO create(BookDTO book) {
         book.setId(book.getId() + 10);
         return book;
     }
 
+
+
     @Override
-    public Book update(Book book) {
-        return null;
+    public BookDTO update(BookDTO book) {
+        book.setId(book.getId() + 1);
+        return book;
     }
 
     @Override
     public boolean delete(int id) {
+        BookDTO book= new BookDTO(2, "adabit", 784, new Date(02 / 02 / 1400));
+//        book.setId(id + 3);
         return false;
+
     }
 
     @Override
-    public Book get(int id) {
-        return null;
+    public BookDTO get() {
+        BookDTO book = new BookDTO(2, "adabit", 784, new Date(02 / 02 / 1400));
+        book.setCategory(new CategoryDTO(1, "Arabi"));
+        return book;
     }
 
     @Override
-    public List<Book> getList() {
+    public List<BookDTO> getList() {
 
-        List<Book> listBook = new ArrayList<>();
+        List<BookDTO> listBook = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            Book book = new Book(i + 1, "arabi", 192, new Date(01 / 01 / 1400));
+            BookDTO book = new BookDTO(i + 1, "arabi", 192, new Date(01 / 01 / 1400));
             listBook.add(book);
         }
         return listBook;

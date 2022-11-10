@@ -1,18 +1,18 @@
 package ir.pt.library.service;
 
-import ir.pt.library.model.Book;
+import ir.pt.library.model.BookDTO;
 
 import java.util.List;
 
 public interface BookService {
 
-    Book create(Book book);
+    BookDTO create(BookDTO book);
 
-    Book update(Book book);
+    BookDTO update(BookDTO book);
 
     boolean delete(int id);
 
-    Book get(int id);
+    BookDTO get();
 
-    List<Book> getList();
+    List<BookDTO> getList();
 }

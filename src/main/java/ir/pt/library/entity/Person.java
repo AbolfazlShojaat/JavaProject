@@ -1,4 +1,5 @@
-package ir.pt.library.model;
+package ir.pt.library.entity;
+
 
 public class Person {
     private int id;
