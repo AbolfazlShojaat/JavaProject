@@ -15,11 +15,12 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
+
     @Override
     public CategoryDTO create(CategoryDTO model) {
-        ir.pt.library.entity.Category entityCategory= new ir.pt.library.entity.Category(model.getName());
+        ir.pt.library.entity.Category entityCategory = new ir.pt.library.entity.Category(model.getName());
         categoryRepo.save(entityCategory);
-        CategoryDTO categoryModel= new CategoryDTO(entityCategory.getId(), entityCategory.getName());
+        CategoryDTO categoryModel = new CategoryDTO(entityCategory.getId(), entityCategory.getName());
         return categoryModel;
     }
 
@@ -27,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDTO update(CategoryDTO model) {
         Category entitycategory = new Category(model.getId(), model.getName());
         categoryRepo.save(entitycategory);
-        CategoryDTO categoryDTO= new CategoryDTO(entitycategory.getId(), entitycategory.getName());
+        CategoryDTO categoryDTO = new CategoryDTO(entitycategory.getId(), entitycategory.getName());
         return categoryDTO;
     }
 
@@ -39,15 +40,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO get(Integer id) {
-        Category entityCategory= categoryRepo.findById(id).get();
+        Category entityCategory = categoryRepo.findById(id).get();
         return new CategoryDTO(entityCategory.getId(), entityCategory.getName());
     }
 
     @Override
     public List<CategoryDTO> getAll() {
-        List<Category> categories= (List) categoryRepo.findAll();
-        List<CategoryDTO> categoryDTOS= new ArrayList<>();
-        for (Category entityCategory : categories){
+        List<Category> categories = (List) categoryRepo.findAll();
+        List<CategoryDTO> categoryDTOS = new ArrayList<>();
+        for (Category entityCategory : categories) {
             categoryDTOS.add(new CategoryDTO(entityCategory.getId(), entityCategory.getName()));
         }
         return categoryDTOS;

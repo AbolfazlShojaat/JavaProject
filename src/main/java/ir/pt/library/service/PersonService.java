@@ -10,9 +10,9 @@ public interface PersonService {
 
     PersonDTO update(PersonDTO person);
 
-    boolean delete(int id);
+    boolean delete(Integer id);
 
-    PersonDTO get(int id);
+    PersonDTO get(Integer id);
 
-    List<PersonDTO> getList();
+    List<PersonDTO> getAll();
 }
