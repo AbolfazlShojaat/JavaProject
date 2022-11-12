@@ -4,7 +4,7 @@ package ir.pt.library.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(schema = "shojaat")
+@Table(schema = "shojaat", name = "Person")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")

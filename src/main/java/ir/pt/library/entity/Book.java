@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(schema = "Shojaat")
+@Table(schema = "Shojaat", name = "Book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_book")
@@ -22,6 +22,14 @@ public class Book {
     public Book() {
     }
 
+    public Book(int id, String name, int shabak, Date printData, Category category) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+    }
+
     public Book(String name, int shabak, Date printData, Category category) {
         this.name = name;
         this.shabak = shabak;
@@ -29,8 +37,6 @@ public class Book {
         this.category = category;
     }
 
-    public Book(int id, String name, Date printData, int shabak, CategoryDTO category) {
-    }
 
     public int getId() {
         return id;

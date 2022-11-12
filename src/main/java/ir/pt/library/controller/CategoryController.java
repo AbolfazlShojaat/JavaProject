@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "category")
+@RequestMapping(value = "/category")
 public class CategoryController {
     @Autowired
     private CategoryService service;

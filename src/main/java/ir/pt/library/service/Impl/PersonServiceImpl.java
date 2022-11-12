@@ -42,7 +42,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDTO get(Integer id) {
-        Person entityPerson= personRepo.findById(id).get();
+        Person entityPerson = personRepo.findById(id).get();
         return new PersonDTO(entityPerson.getId(), entityPerson.getFirstName(), entityPerson.getLastName(), entityPerson.getNationalCode());
     }
 
@@ -50,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
     public List<PersonDTO> getAll() {
         List<Person> people = (List) personRepo.findAll();
         List<PersonDTO> personDTOS = new ArrayList<>();
-        for (Person entityPerson : people){
+        for (Person entityPerson : people) {
             personDTOS.add(new PersonDTO(entityPerson.getId(), entityPerson.getFirstName(), entityPerson.getLastName(), entityPerson.getNationalCode()));
         }
         return personDTOS;

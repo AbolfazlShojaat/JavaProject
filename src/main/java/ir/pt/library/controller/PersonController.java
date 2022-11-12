@@ -20,9 +20,10 @@ public class PersonController {
     }
 
     @GetMapping(value = "/get")
-    public ResponseEntity person(@RequestParam Integer id) throws Exception{
+    public ResponseEntity person(@RequestParam Integer id) throws Exception {
         return ResponseEntity.ok(personService.get(id));
     }
+
     @GetMapping(value = "/getAll")
     public ResponseEntity people() throws Exception {
         return ResponseEntity.ok(personService.getAll());

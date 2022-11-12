@@ -2,6 +2,7 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.DAO.BookRepo;
 import ir.pt.library.entity.Book;
+import ir.pt.library.entity.Category;
 import ir.pt.library.model.BookDTO;
 import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.BookService;
@@ -20,28 +21,49 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO create(BookDTO model) {
-        Book entityBook= new Book(model.getId(),model.getName(), model.getPrintData(), model.getShabak(), model.getCategory());
-
-        return null;
+        Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
+        Book entityBook = new Book(model.getName(), model.getShabak(), model.getPrintData(), category);
+        bookRepo.save(entityBook);
+        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
+                entityBook.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
+        return bookDTO;
     }
 
     @Override
     public BookDTO update(BookDTO model) {
-        return null;
+        Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
+        Book entityBook = new Book(model.getId(), model.getName(), model.getShabak(), model.getPrintData(), category);
+        bookRepo.save(entityBook);
+        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
+                entityBook.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
+        return bookDTO;
     }
 
     @Override
     public boolean delete(Integer id) {
-        return false;
+        bookRepo.deleteById(id);
+        return true;
     }
 
     @Override
     public BookDTO get(Integer id) {
-        return null;
+        Book entityBook = bookRepo.findById(id).get();
+        CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
+        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
+                entityBook.getPrintData(), category);
+        return bookDTO;
     }
 
     @Override
     public List<BookDTO> getAll() {
-        return null;
+        List<Book> books = (List) bookRepo.findAll();
+        List<BookDTO> bookDTOS = new ArrayList<>();
+        for (Book entityBook : books) {
+            CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
+            BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
+                    entityBook.getPrintData(), category);
+            bookDTOS.add(bookDTO);
+        }
+        return bookDTOS;
     }
 }

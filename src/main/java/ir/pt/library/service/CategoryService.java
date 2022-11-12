@@ -5,6 +5,7 @@ import ir.pt.library.model.CategoryDTO;
 import java.util.List;
 
 public interface CategoryService {
+
     CategoryDTO create(CategoryDTO model);
 
     CategoryDTO update(CategoryDTO model);

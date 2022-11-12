@@ -16,35 +16,27 @@ public class BookController {
 
     @PostMapping(value = "/add")
     public ResponseEntity addBook(@RequestBody BookDTO book) throws Exception {
-//        bookService.create(book);
-        return ResponseEntity.ok(bookService.create(book));
+        return ResponseEntity.ok().body(bookService.create(book));
     }
 
-//    @PostMapping(value = "/add")
-//    public ResponseEntity addBook(@RequestBody Book book) throws Exception {
-////        bookService.create(book);
-//        return ResponseEntity.ok(bookService.create(book));
-//    }
+    @GetMapping(value = "/get")
+    public ResponseEntity searchBook(@RequestParam Integer id) throws Exception {
+        return ResponseEntity.ok(bookService.get(id));
+    }
 
-    @GetMapping(value = "/select")
+    @GetMapping(value = "/getAll")
     public ResponseEntity selectBook() throws Exception {
-        return ResponseEntity.ok(bookService.getList());
+        return ResponseEntity.ok(bookService.getAll());
     }
-
-    @GetMapping(value = "/search")
-    public ResponseEntity searchBook() throws Exception {
-        return ResponseEntity.ok(bookService.get());
-    }
-
 
     @PutMapping(value = "/update")
     public ResponseEntity updateBook(@RequestBody BookDTO book) throws Exception {
-        return ResponseEntity.ok(book);
+        return ResponseEntity.ok(bookService.update(book));
     }
 
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity deleteBook(@RequestBody BookDTO book) throws Exception {
-        return ResponseEntity.ok(bookService.delete(2));
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity deleteBook(@PathVariable Integer id) throws Exception {
+        return ResponseEntity.ok(bookService.delete(id));
     }
 }
 
