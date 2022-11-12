@@ -21,7 +21,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO create(BookDTO model) {
         Book entityBook= new Book(model.getId(),model.getName(), model.getPrintData(), model.getShabak(), model.getCategory());
-
         return null;
     }
 
