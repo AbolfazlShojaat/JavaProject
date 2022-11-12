@@ -50,7 +50,7 @@ public class BookServiceImpl implements BookService {
         Book entityBook = bookRepo.findById(id).get();
         CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
         BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                entityBook.getPrintData(),category);
+                entityBook.getPrintData(), category);
         return bookDTO;
     }
 
@@ -61,7 +61,7 @@ public class BookServiceImpl implements BookService {
         for (Book entityBook : books) {
             CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
             BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                    entityBook.getPrintData(),category);
+                    entityBook.getPrintData(), category);
             bookDTOS.add(bookDTO);
         }
         return bookDTOS;

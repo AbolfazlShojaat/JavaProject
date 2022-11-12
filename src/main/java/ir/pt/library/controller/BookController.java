@@ -21,7 +21,7 @@ public class BookController {
 
     @GetMapping(value = "/get")
     public ResponseEntity searchBook(@RequestParam Integer id) throws Exception {
-        return ResponseEntity.ok(bookService.get(id)) ;
+        return ResponseEntity.ok(bookService.get(id));
     }
 
     @GetMapping(value = "/getAll")
