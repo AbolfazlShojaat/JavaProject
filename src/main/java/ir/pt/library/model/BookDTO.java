@@ -5,18 +5,26 @@ import java.util.Date;
 public class BookDTO {
     private int id;
     private String name;
-    //    private String Category;
-    CategoryDTO category = new CategoryDTO();
     private int shabak;
     private Date printData;
+    private CategoryDTO category;
 
+    public BookDTO() {
+    }
 
-    public BookDTO(int id, String name /*String category*/, int shabak, Date printData) {
-        this.id = id;
+    public BookDTO(String name, int shabak, Date printData, CategoryDTO category) {
         this.name = name;
-//        Category = category;
         this.shabak = shabak;
         this.printData = printData;
+        this.category = category;
+    }
+
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
     }
 
     public int getId() {
@@ -35,17 +43,7 @@ public class BookDTO {
         this.name = name;
     }
 
-//    public String getCategory() {
-//        return Category;
-//    }
-//
-//    public void setCategory(String category) {
-//        Category = category;
-//    }
-
     public CategoryDTO getCategory() {
-        category.getId();
-        category.getName();
         return category;
     }
 

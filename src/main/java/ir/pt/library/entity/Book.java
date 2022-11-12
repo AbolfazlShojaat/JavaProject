@@ -1,5 +1,7 @@
 package ir.pt.library.entity;
 
+import ir.pt.library.model.CategoryDTO;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,12 +22,14 @@ public class Book {
     public Book() {
     }
 
-    public Book(int id, String name, Category category, int shabak, Date printData) {
-        this.id = id;
+    public Book(String name, int shabak, Date printData, Category category) {
         this.name = name;
-        this.category = category;
         this.shabak = shabak;
         this.printData = printData;
+        this.category = category;
+    }
+
+    public Book(int id, String name, Date printData, int shabak, CategoryDTO category) {
     }
 
     public int getId() {

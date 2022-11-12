@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface BookService {
 
-    BookDTO create(BookDTO book);
+    BookDTO create(BookDTO model);
 
-    BookDTO update(BookDTO book);
+    BookDTO update(BookDTO model);
 
-    boolean delete(int id);
+    boolean delete(Integer id);
 
-    BookDTO get();
+    BookDTO get(Integer id);
 
-    List<BookDTO> getList();
+    List<BookDTO> getAll();
 }
