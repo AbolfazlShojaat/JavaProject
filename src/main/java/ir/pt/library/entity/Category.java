@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(schema = "Shojaat", name = "Category")
+@Table(schema = "shojaat", name = "Category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")

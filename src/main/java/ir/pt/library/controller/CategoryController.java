@@ -17,7 +17,11 @@ public class CategoryController {
 
     @PostMapping(value = "/add")
     public ResponseEntity addCategory(@RequestBody CategoryDTO category) throws Exception {
-        return ResponseEntity.ok().body(service.create(category));
+        try {
+            return ResponseEntity.ok().body(service.create(category));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 
     @GetMapping(value = "/getAll")

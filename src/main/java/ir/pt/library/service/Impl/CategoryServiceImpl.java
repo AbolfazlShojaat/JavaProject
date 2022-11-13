@@ -2,6 +2,7 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.DAO.CategoryRepo;
 import ir.pt.library.entity.Category;
+import ir.pt.library.mapper.CategoryConvert;
 import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,23 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
+    private CategoryConvert converter = new CategoryConvert();
+
+    public Boolean findNameExists(String categoryName) {
+        if (categoryRepo.existsByNameEquals(categoryName)) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
-    public CategoryDTO create(CategoryDTO model) {
-        ir.pt.library.entity.Category entityCategory = new ir.pt.library.entity.Category(model.getName());
-        categoryRepo.save(entityCategory);
-        CategoryDTO categoryModel = new CategoryDTO(entityCategory.getId(), entityCategory.getName());
-        return categoryModel;
+    public CategoryDTO create(CategoryDTO model) throws Exception {
+        if (!this.findNameExists(model.getName())) {
+            return converter.convertToModel(categoryRepo.save(converter.convertToEntity(model)));
+        } else
+            throw new Exception("This name exists");
     }
+
 
     @Override
     public CategoryDTO update(CategoryDTO model) {
