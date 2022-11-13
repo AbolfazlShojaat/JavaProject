@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryDTO create(CategoryDTO model);
+    Boolean findNameExists(String categoryName) throws Exception;
+
+    CategoryDTO create(CategoryDTO model) throws Exception;
 
     CategoryDTO update(CategoryDTO model);
 
