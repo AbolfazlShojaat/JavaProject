@@ -6,7 +6,7 @@ import ir.pt.library.model.CategoryDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryConvert {
+public class CategoryConverter {
     public Category convertToEntity(CategoryDTO model) {
         return new Category(model.getId(), model.getName());
     }

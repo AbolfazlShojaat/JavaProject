@@ -1,18 +1,24 @@
 package ir.pt.library.service;
 
 import ir.pt.library.model.PersonDTO;
+import ir.pt.library.model.PersonModel;
 
 import java.util.List;
 
 public interface PersonService {
+    Boolean existByCode(String code);
 
-    PersonDTO create(PersonDTO person);
+    List<PersonModel> findByNationalCode(String code);
 
-    PersonDTO update(PersonDTO person);
+    PersonModel create(PersonDTO person) throws Exception;
+
+    PersonModel update(PersonDTO person);
 
     boolean delete(Integer id);
 
-    PersonDTO get(Integer id);
+    boolean deleteById(Integer id);
 
-    List<PersonDTO> getAll();
+    PersonModel get(Integer id);
+
+    List<PersonModel> getAll();
 }

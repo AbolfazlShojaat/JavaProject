@@ -5,6 +5,7 @@ public class PersonDTO {
     private String firstName;
     private String lastName;
     private int nationalCode;
+    private int idNO;
 
     public PersonDTO() {
     }
@@ -15,11 +16,12 @@ public class PersonDTO {
         this.nationalCode = nationalCode;
     }
 
-    public PersonDTO(int id, String firstName, String lastName, int nationalCode) {
+    public PersonDTO(int id, String firstName, String lastName, int nationalCode, int idNO) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationalCode = nationalCode;
+        this.idNO = idNO;
     }
 
     public int getId() {
@@ -52,5 +54,13 @@ public class PersonDTO {
 
     public void setNationalCode(int nationalCode) {
         this.nationalCode = nationalCode;
+    }
+
+    public int getIdNO() {
+        return idNO;
+    }
+
+    public void setIdNO(int idNO) {
+        this.idNO = idNO;
     }
 }

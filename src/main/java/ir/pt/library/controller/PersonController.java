@@ -19,6 +19,11 @@ public class PersonController {
         return ResponseEntity.ok().body(personService.create(person));
     }
 
+    @GetMapping(value = "/getByNationalCode/{code}")
+    public ResponseEntity person(@PathVariable String code) throws Exception {
+        return ResponseEntity.ok(personService.findByNationalCode(code));
+    }
+
     @GetMapping(value = "/get")
     public ResponseEntity person(@RequestParam Integer id) throws Exception {
         return ResponseEntity.ok(personService.get(id));

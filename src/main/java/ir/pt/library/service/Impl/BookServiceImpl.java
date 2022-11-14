@@ -3,6 +3,7 @@ package ir.pt.library.service.Impl;
 import ir.pt.library.DAO.BookRepo;
 import ir.pt.library.entity.Book;
 import ir.pt.library.entity.Category;
+import ir.pt.library.mapper.BookConverter;
 import ir.pt.library.model.BookDTO;
 import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.BookService;
@@ -18,6 +19,7 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepo bookRepo;
+    private BookConverter converter = new BookConverter();
 
     @Override
     public BookDTO create(BookDTO model) {
