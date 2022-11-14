@@ -10,9 +10,14 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")
     @SequenceGenerator(name = "seq_category", initialValue = 1, allocationSize = 1)
     private int id;
+    @Column
     private String firstName;
+    @Column
     private String lastName;
+    @Column(name = "national_code", length = 10)
     private int nationalCode;
+    @Column(name = "id_num", length = 10)
+    private String idNumber;
 
     public Person() {
     }
@@ -29,6 +34,7 @@ public class Person {
         this.lastName = lastName;
         this.nationalCode = nationalCode;
     }
+
 
     public int getId() {
         return id;
@@ -60,5 +66,13 @@ public class Person {
 
     public void setNationalCode(int nationalCode) {
         this.nationalCode = nationalCode;
+    }
+
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
     }
 }
