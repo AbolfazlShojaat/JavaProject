@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryConverter {
+
     public Category convertToEntity(CategoryDTO model) {
         return new Category(model.getId(), model.getName());
     }

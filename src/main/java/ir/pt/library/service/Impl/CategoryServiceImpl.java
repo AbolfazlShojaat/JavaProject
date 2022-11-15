@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO update(CategoryDTO model) {
-        return converter.convertToModel(categoryRepo.save(categoryRepo.save(converter.convertToEntity(model))));
+        return converter.convertToModel(categoryRepo.save(converter.convertToEntity(model)));
     }
 
     @Override

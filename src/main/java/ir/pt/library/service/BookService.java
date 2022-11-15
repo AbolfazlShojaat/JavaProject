@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface BookService {
 
-    BookDTO create(BookDTO model);
+    Boolean findNameExists(String bookName) throws Exception;
+
+    BookDTO create(BookDTO model) throws Exception;
 
     BookDTO update(BookDTO model);
 
