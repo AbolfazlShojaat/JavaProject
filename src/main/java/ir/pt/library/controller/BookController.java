@@ -16,7 +16,11 @@ public class BookController {
 
     @PostMapping(value = "/add")
     public ResponseEntity addBook(@RequestBody BookDTO book) throws Exception {
-        return ResponseEntity.ok().body(bookService.create(book));
+        try {
+            return ResponseEntity.ok().body(bookService.create(book));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 
     @GetMapping(value = "/get")

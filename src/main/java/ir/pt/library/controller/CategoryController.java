@@ -24,10 +24,6 @@ public class CategoryController {
         }
     }
 
-    @GetMapping(value = "/getAll")
-    public ResponseEntity category() throws Exception {
-        return ResponseEntity.ok(service.getAll());
-    }
 
     @PutMapping(value = "/update")
     public ResponseEntity updateCategory(@RequestBody CategoryDTO category) throws Exception {
@@ -44,5 +40,9 @@ public class CategoryController {
         return ResponseEntity.ok(service.get(id));
     }
 
+    @GetMapping(value = "/getAll")
+    public ResponseEntity category() throws Exception {
+        return ResponseEntity.ok(service.getAll());
+    }
 
 }

@@ -21,24 +21,24 @@ public class BookServiceImpl implements BookService {
     private BookRepo bookRepo;
     private BookConverter converter = new BookConverter();
 
+    public Boolean findNameExists(String bookName) {
+        if (bookRepo.existsByNameEquals(bookName)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
-    public BookDTO create(BookDTO model) {
-        Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
-        Book entityBook = new Book(model.getName(), model.getShabak(), model.getPrintData(), category);
-        bookRepo.save(entityBook);
-        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                entityBook.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
-        return bookDTO;
+    public BookDTO create(BookDTO model) throws Exception {
+        if (!this.findNameExists(model.getName())) {
+            return converter.convertToModel(bookRepo.save(converter.convertToEntity(model)));
+        } else
+            throw new Exception("This name exists");
     }
 
     @Override
     public BookDTO update(BookDTO model) {
-        Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
-        Book entityBook = new Book(model.getId(), model.getName(), model.getShabak(), model.getPrintData(), category);
-        bookRepo.save(entityBook);
-        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                entityBook.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
-        return bookDTO;
+        return converter.convertToModel(bookRepo.save(converter.convertToEntity(model)));
     }
 
     @Override
@@ -49,23 +49,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO get(Integer id) {
-        Book entityBook = bookRepo.findById(id).get();
-        CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
-        BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                entityBook.getPrintData(), category);
-        return bookDTO;
+        return converter.convertToModel(bookRepo.findById(id).get());
     }
 
     @Override
     public List<BookDTO> getAll() {
-        List<Book> books = (List) bookRepo.findAll();
-        List<BookDTO> bookDTOS = new ArrayList<>();
-        for (Book entityBook : books) {
-            CategoryDTO category = new CategoryDTO(entityBook.getCategory().getId(), entityBook.getCategory().getName());
-            BookDTO bookDTO = new BookDTO(entityBook.getId(), entityBook.getName(), entityBook.getShabak(),
-                    entityBook.getPrintData(), category);
-            bookDTOS.add(bookDTO);
-        }
-        return bookDTOS;
+        return converter.convertToModel((List) bookRepo.findAll());
     }
 }

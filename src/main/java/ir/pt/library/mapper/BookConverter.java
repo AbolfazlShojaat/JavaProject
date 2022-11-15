@@ -23,17 +23,16 @@ public class BookConverter {
     }
 
     public BookDTO convertToModel(Book entity) {
-        BookDTO model = new BookDTO();
-        Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
+        Category category = new Category(entity.getCategory().getId(), entity.getCategory().getName());
         return new BookDTO(entity.getId(), entity.getName(), entity.getShabak(),
                 entity.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
     }
 
     public List<BookDTO> convertToModel(List<Book> entities) {
-        List<BookDTO> entityBook = new ArrayList<>();
+        List<BookDTO> bookDTOS = new ArrayList<>();
         for (Book entity : entities) {
-            entityBook.add(convertToModel(entity));
+            bookDTOS.add(convertToModel(entity));
         }
-        return entityBook;
+        return bookDTOS;
     }
 }
