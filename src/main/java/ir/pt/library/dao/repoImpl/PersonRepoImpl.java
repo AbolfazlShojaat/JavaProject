@@ -1,6 +1,6 @@
-package ir.pt.library.DAO.PersonRepoImpl;
+package ir.pt.library.dao.repoImpl;
 
-import ir.pt.library.DAO.PersonRepo;
+import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.Person;
 import org.springframework.stereotype.Repository;
 
@@ -43,9 +43,9 @@ public class PersonRepoImpl implements PersonRepo {
     @Override
     public Person update(Person entity) {
 
-        int i= entityManager.createQuery("update Person p " + " set p.firstName= :f , p.lastName= :l , p.nationalCode= :n " +
+        int i = entityManager.createQuery("update Person p " + " set p.firstName= :f , p.lastName= :l , p.nationalCode= :n " +
                 " where p.id= :code")
-                .setParameter("code",entity.getId() )
+                .setParameter("code", entity.getId())
                 .setParameter("f", entity.getFirstName())
                 .setParameter("l", entity.getLastName())
                 .setParameter("n", entity.getNationalCode())
@@ -57,16 +57,16 @@ public class PersonRepoImpl implements PersonRepo {
 
     @Override
     public Boolean remove(Integer id) {
-        Person entity=this.get(id);
+        Person entity = this.get(id);
         entityManager.remove(entity);
         return true;
     }
 
     @Override
     public Boolean remove(Person entity) {
-        int i= entityManager.createQuery("delete from Person p " +
+        int i = entityManager.createQuery("delete from Person p " +
                 " where p.id= :code")
-                .setParameter("code",entity.getId() )
+                .setParameter("code", entity.getId())
                 .executeUpdate();
         return true;
     }

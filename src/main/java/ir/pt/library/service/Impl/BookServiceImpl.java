@@ -1,17 +1,12 @@
 package ir.pt.library.service.Impl;
 
-import ir.pt.library.DAO.BookRepo;
-import ir.pt.library.entity.Book;
-import ir.pt.library.entity.Category;
+import ir.pt.library.dao.BookRepo;
 import ir.pt.library.mapper.BookConverter;
 import ir.pt.library.model.BookDTO;
-import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service

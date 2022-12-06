@@ -1,6 +1,6 @@
 package ir.pt.library.service.Impl;
 
-import ir.pt.library.DAO.PersonRepo;
+import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.Person;
 import ir.pt.library.mapper.PersonConverter;
 import ir.pt.library.model.PersonDTO;
@@ -39,7 +39,7 @@ public class PersonServiceImpl implements PersonService {
     @Transactional
     @Override
     public PersonModel update(PersonDTO person) {
-        Person entity= personRepo.update(converter.convertToEntity(person));
+        Person entity = personRepo.update(converter.convertToEntity(person));
         return converter.convertToModel(entity);
     }
 
@@ -59,7 +59,7 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonModel get(Integer id) {
-        Person entity= personRepo.get(id);
+        Person entity = personRepo.get(id);
         return converter.convertToModel(entity);
     }
 
