@@ -4,6 +4,7 @@ import ir.pt.library.model.CategoryDTO;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(schema = "shojaat", name = "Book")
@@ -19,8 +20,15 @@ public class Book {
     @ManyToOne
     private Category category;
 
+    @OneToMany(mappedBy = "book")
+    private List<LibraryEntity> libraryEntities;
+
+    @OneToMany(mappedBy = "book")
+    private List<BorrowEntity> borrowEntities;
+
     public Book() {
     }
+
 
     public Book(int id, String name, int shabak, Date printData, Category category) {
         this.id = id;
@@ -76,5 +84,21 @@ public class Book {
 
     public void setPrintData(Date printData) {
         this.printData = printData;
+    }
+
+    public List<LibraryEntity> getLibraryEntities() {
+        return libraryEntities;
+    }
+
+    public void setLibraryEntities(List<LibraryEntity> libraryEntities) {
+        this.libraryEntities = libraryEntities;
+    }
+
+    public List<BorrowEntity> getBorrowEntities() {
+        return borrowEntities;
+    }
+
+    public void setBorrowEntities(List<BorrowEntity> borrowEntities) {
+        this.borrowEntities = borrowEntities;
     }
 }

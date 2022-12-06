@@ -2,6 +2,7 @@ package ir.pt.library.entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(schema = "shojaat", name = "Person")
@@ -18,6 +19,9 @@ public class Person {
     private int nationalCode;
     @Column(name = "id_num", length = 10)
     private String idNumber;
+
+    @OneToMany(mappedBy = "person")
+    private List<BorrowEntity> borrowEntities;
 
     public Person() {
     }
@@ -74,5 +78,13 @@ public class Person {
 
     public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
+    }
+
+    public List<BorrowEntity> getBorrowEntities() {
+        return borrowEntities;
+    }
+
+    public void setBorrowEntities(List<BorrowEntity> borrowEntities) {
+        this.borrowEntities = borrowEntities;
     }
 }

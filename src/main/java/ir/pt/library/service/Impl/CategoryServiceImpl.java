@@ -1,6 +1,6 @@
 package ir.pt.library.service.Impl;
 
-import ir.pt.library.DAO.CategoryRepo;
+import ir.pt.library.dao.CategoryRepo;
 import ir.pt.library.mapper.CategoryConverter;
 import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.CategoryService;
