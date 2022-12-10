@@ -7,6 +7,9 @@ import java.util.List;
 
 @Repository
 public interface LibraryRepo {
+
+    LibraryEntity create(LibraryEntity entity);
+
     List<LibraryEntity> isBorrowAble();
 
     List<LibraryEntity> getAllLibrary();

@@ -1,6 +1,8 @@
 package ir.pt.library.service.Impl;
 
+import ir.pt.library.dao.BookRepo;
 import ir.pt.library.dao.BorrowRepo;
+import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.BorrowEntity;
 import ir.pt.library.entity.Person;
 import ir.pt.library.mapper.BorrowConverter;
@@ -16,9 +18,13 @@ import java.util.List;
 public class BorrowServiceImpl implements BorrowService {
 
     @Autowired
-    private BorrowRepo repo;
+    private BorrowRepo borrowRepo;
     @Autowired
     private BorrowConverter converter;
+    @Autowired
+    private PersonRepo personRepo;
+    @Autowired
+    private BookRepo bookRepo;
 
     @Override
     public Boolean findNameExists(String categoryName) throws Exception {
@@ -28,7 +34,10 @@ public class BorrowServiceImpl implements BorrowService {
     @Transactional
     @Override
     public BorrowDTO create(BorrowDTO model) throws Exception {
-        return converter.convertToModel(repo.create(converter.convertToEntity(model)));
+        BorrowEntity entity= converter.convertToEntity(model);
+        entity.setPerson(personRepo.get(model.getPerson().getId()));
+        entity.setBook(bookRepo.getById(model.getBook().getId()));
+        return converter.convertToModel(borrowRepo.create(entity));
     }
 
     @Override
@@ -48,14 +57,14 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public List<BorrowDTO> getAllBorrowPerson(Person person) {
-        List<BorrowEntity> entities = repo.getAllBorrowPerson(person);
+        List<BorrowEntity> entities = borrowRepo.getAllBorrowPerson(person);
         return converter.convertToModels(entities);
 
     }
 
     @Override
     public List<BorrowDTO> getAllBorrow() {
-        return converter.convertToModels((List) repo.getAllBorrow());
+        return converter.convertToModels((List) borrowRepo.getAllBorrow());
 
     }
 }

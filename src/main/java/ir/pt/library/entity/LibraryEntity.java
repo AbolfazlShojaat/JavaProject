@@ -24,8 +24,4 @@ public class LibraryEntity {
     private Integer number;
     private Integer existNum;
     private Boolean isBorrowAble;
-
-    public LibraryEntity(Book book) {
-        this.book = book;
-    }
 }

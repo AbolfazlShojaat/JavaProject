@@ -15,6 +15,12 @@ public class LibraryRepoImpl implements LibraryRepo {
     private EntityManager em;
 
     @Override
+    public LibraryEntity create(LibraryEntity entity) {
+        em.persist(entity);
+        return entity;
+    }
+
+    @Override
     public LibraryEntity updateReceive(LibraryEntity entity) {
         int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
                 " where l.id= :code")
