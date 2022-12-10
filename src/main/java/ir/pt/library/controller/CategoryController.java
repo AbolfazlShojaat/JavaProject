@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/category")
@@ -16,7 +15,7 @@ public class CategoryController {
     private CategoryService service;
 
     @PostMapping(value = "/add")
-    public ResponseEntity addCategory(@RequestBody CategoryDTO category) throws Exception {
+    public ResponseEntity addCategory(@RequestBody @Valid CategoryDTO category) throws Exception {
         try {
             return ResponseEntity.ok().body(service.create(category));
         } catch (Exception ex) {

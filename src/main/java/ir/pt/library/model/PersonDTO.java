@@ -1,8 +1,13 @@
 package ir.pt.library.model;
 
+import javax.validation.constraints.NotNull;
+
 public class PersonDTO {
     private int id;
+
+    @NotNull(message = "firstName.validation")
     private String firstName;
+
     private String lastName;
     private int nationalCode;
     private int idNO;

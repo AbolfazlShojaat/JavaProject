@@ -1,7 +1,11 @@
 package ir.pt.library.model;
 
+import javax.validation.constraints.NotNull;
+
 public class CategoryDTO {
     private int id;
+
+    @NotNull(message = "name.validation")
     private String name;
 
     public CategoryDTO(int id, String name) {
