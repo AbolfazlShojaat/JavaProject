@@ -1,5 +1,6 @@
 package ir.pt.library.service.Impl;
 
+import ir.pt.library.dao.BookRepo;
 import ir.pt.library.dao.LibraryRepo;
 import ir.pt.library.entity.LibraryEntity;
 import ir.pt.library.mapper.LibraryConverter;
@@ -19,15 +20,20 @@ public class LibraryServiceImpl implements LibraryService {
     private LibraryRepo libraryRepo;
     @Autowired
     private LibraryConverter converter;
+    @Autowired
+    private BookRepo bookRepo;
 
     @Override
     public List<LibraryDTO> checkIsBorrowAble() {
         return converter.convertToModels(libraryRepo.isBorrowAble());
     }
 
+    @Transactional
     @Override
     public LibraryDTO create(LibraryDTO model) throws Exception {
-        return null;
+        LibraryEntity entity= converter.convertToEntity(model);
+        entity.setBook(bookRepo.getById(model.getBook().getId()));
+        return converter.convertToModel(libraryRepo.create(entity));
     }
 
 //    @Override
