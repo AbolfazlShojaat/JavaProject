@@ -1,7 +1,7 @@
 package ir.pt.library.entity;
 
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,7 +11,10 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_category")
     @SequenceGenerator(name = "seq_category", initialValue = 1, allocationSize = 1)
     private int id;
+
+    @NotNull(message = "name.validation")
     private String name;
+
     private boolean isEnabled;
 
     @OneToMany(mappedBy = "category")

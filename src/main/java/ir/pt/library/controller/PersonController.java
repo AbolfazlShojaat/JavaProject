@@ -4,8 +4,9 @@ import ir.pt.library.model.PersonDTO;
 import ir.pt.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 
 @RestController
@@ -15,7 +16,7 @@ public class PersonController {
     private PersonService personService;
 
     @PostMapping(value = "/add")
-    public ResponseEntity addPerson(@RequestBody PersonDTO person) throws Exception {
+    public ResponseEntity addPerson(@RequestBody @Valid PersonDTO person) throws Exception {
         return ResponseEntity.ok().body(personService.create(person));
     }
 
