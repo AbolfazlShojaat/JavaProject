@@ -34,8 +34,8 @@ public class CategoryController {
         return ResponseEntity.ok(service.delete(id));
     }
 
-    @GetMapping(value = "/get")
-    public ResponseEntity searchCategory(@RequestParam Integer id) throws Exception {
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity searchCategory(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(service.get(id));
     }
 

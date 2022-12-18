@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 public class CategoryDTO {
     private int id;
 
+
     @NotNull(message = "name.validation")
     private String name;
 

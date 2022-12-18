@@ -5,6 +5,10 @@ import ir.pt.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.annotation.MultipartConfig;
+import java.io.IOException;
 
 @RestController
 @RequestMapping(value = "/book")
@@ -41,6 +45,11 @@ public class BookController {
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity deleteBook(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(bookService.delete(id));
+    }
+
+    @PostMapping(value = "/upload")
+    public ResponseEntity uploadBook(@RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok().body(file.getBytes());
     }
 }
 

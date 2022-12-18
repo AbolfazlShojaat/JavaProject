@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface BorrowService {
 
+    Boolean lendingBooks(BorrowDTO model) throws Exception;
 
     Boolean findNameExists(String categoryName) throws Exception;
 
@@ -19,7 +20,7 @@ public interface BorrowService {
 
     BorrowDTO personGetBorrow(Integer id);
 
-    List<BorrowDTO> getAllBorrowPerson(Person person);
+    List<BorrowDTO> getAllBorrowPerson(Integer id);
 
     List<BorrowDTO> getAllBorrow();
 }

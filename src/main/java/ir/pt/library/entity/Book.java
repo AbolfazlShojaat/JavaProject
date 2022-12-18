@@ -29,7 +29,6 @@ public class Book {
     public Book() {
     }
 
-
     public Book(int id, String name, int shabak, Date printData, Category category) {
         this.id = id;
         this.name = name;

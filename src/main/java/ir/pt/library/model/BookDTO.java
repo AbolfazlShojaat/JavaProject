@@ -1,5 +1,9 @@
 package ir.pt.library.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotNull;
+import java.io.File;
 import java.util.Date;
 
 public class BookDTO {
@@ -8,6 +12,9 @@ public class BookDTO {
     private int shabak;
     private Date printData;
     private CategoryDTO category;
+    @NotNull
+    private MultipartFile cover;
+
 
     public BookDTO() {
     }
