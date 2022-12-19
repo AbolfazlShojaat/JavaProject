@@ -10,6 +10,8 @@ public interface LibraryRepo {
 
     LibraryEntity create(LibraryEntity entity);
 
+    LibraryEntity get(Integer id);
+
     List<LibraryEntity> isBorrowAble();
 
     List<LibraryEntity> getAllLibrary();

@@ -1,6 +1,5 @@
 package ir.pt.library.controller;
 
-import ir.pt.library.entity.Person;
 import ir.pt.library.model.BorrowDTO;
 import ir.pt.library.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;

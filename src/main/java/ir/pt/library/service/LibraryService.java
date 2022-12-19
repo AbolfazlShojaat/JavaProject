@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface LibraryService {
 
+    //true & false
+    boolean loanable(Integer id);
+    //List of trues
     List<LibraryDTO> checkIsBorrowAble() throws Exception;
 
     LibraryDTO create(LibraryDTO model) throws Exception;

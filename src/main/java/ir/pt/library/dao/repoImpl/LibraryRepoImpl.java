@@ -15,6 +15,13 @@ public class LibraryRepoImpl implements LibraryRepo {
     private EntityManager em;
 
     @Override
+    public LibraryEntity get(Integer id) {
+        LibraryEntity library = (LibraryEntity) em.createQuery("from  LibraryEntity l where l.book.id = :id")
+                .setParameter("id", id).getSingleResult();
+        return library;
+    }
+
+    @Override
     public LibraryEntity create(LibraryEntity entity) {
         em.persist(entity);
         return entity;
@@ -58,7 +65,7 @@ public class LibraryRepoImpl implements LibraryRepo {
 
     @Override
     public Integer checkExistNum(Integer id) {
-        int i = (int) em.createQuery("select l.existNum from LibraryEntity l" + " " + "where l.id=: id")
+        int i = (int) em.createQuery("select l.existNum from LibraryEntity l" + " " + "where l.book.id=: id")
                 .setParameter("id", id)
                 .getSingleResult();
         return i;

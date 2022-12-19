@@ -1,7 +1,6 @@
 package ir.pt.library.controller;
 
 import ir.pt.library.model.LibraryDTO;
-import ir.pt.library.model.PersonDTO;
 import ir.pt.library.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +27,11 @@ public class LibraryController {
     @PutMapping(value = "/updateReturn")
     public ResponseEntity updateReturn(@RequestBody LibraryDTO model) throws Exception {
         return ResponseEntity.ok(libraryService.updateWithReturn(model));
+    }
+
+    @GetMapping(value = "/loanable/{idbook}")
+    public ResponseEntity loanable(@PathVariable Integer idbook) {
+        return ResponseEntity.ok(libraryService.loanable(idbook));
     }
 
     @GetMapping(value = "/check")

@@ -24,6 +24,16 @@ public class LibraryServiceImpl implements LibraryService {
     private BookRepo bookRepo;
 
     @Override
+    public boolean loanable(Integer id) {
+        LibraryEntity libraryEntity = libraryRepo.get(id);
+        if (libraryEntity.getIsBorrowAble() == true & libraryEntity.getExistNum() > 0) {
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    @Override
     public List<LibraryDTO> checkIsBorrowAble() {
         return converter.convertToModels(libraryRepo.isBorrowAble());
     }
@@ -31,7 +41,7 @@ public class LibraryServiceImpl implements LibraryService {
     @Transactional
     @Override
     public LibraryDTO create(LibraryDTO model) throws Exception {
-        LibraryEntity entity= converter.convertToEntity(model);
+        LibraryEntity entity = converter.convertToEntity(model);
         entity.setBook(bookRepo.getById(model.getBook().getId()));
         return converter.convertToModel(libraryRepo.create(entity));
     }
