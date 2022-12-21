@@ -1,6 +1,5 @@
 package ir.pt.library.controller;
 
-import ir.pt.library.entity.Person;
 import ir.pt.library.model.BorrowDTO;
 import ir.pt.library.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,8 @@ public class BorrowController {
     }
 
     @GetMapping(value = "/getAllPerson")
-    public ResponseEntity getByPersonId(@RequestBody Person person) throws Exception {
-        return ResponseEntity.ok(service.getAllBorrowPerson(person));
+    public ResponseEntity getByPersonId(@RequestParam Integer id) throws Exception {
+        return ResponseEntity.ok(service.getAllBorrowPerson(id));
     }
 
     @GetMapping(value = "/getAll")
@@ -29,8 +28,8 @@ public class BorrowController {
         return ResponseEntity.ok(service.getAllBorrow());
     }
 
-    @GetMapping(value = "/get")
-    public ResponseEntity searchPerson(@RequestParam Integer id) throws Exception {
-        return ResponseEntity.ok(service.personGetBorrow(id));
-    }
+//    @GetMapping(value = "/get")
+//    public ResponseEntity searchPerson(@RequestParam Integer id) throws Exception {
+//        return ResponseEntity.ok(service.personGetBorrow(id));
+//    }
 }

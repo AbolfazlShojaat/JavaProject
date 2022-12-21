@@ -11,7 +11,7 @@ public interface BorrowRepo{
 
     BorrowEntity create(BorrowEntity entity);
 
-    List<BorrowEntity> getAllBorrowPerson(Person person);
+    List<BorrowEntity> getAllBorrowPerson(Integer id);
 
     List<BorrowEntity> getAllBorrow();
     //    LibraryEntity findAllByBook_LibraryEntities(String bookName);

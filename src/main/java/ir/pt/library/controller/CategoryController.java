@@ -23,7 +23,6 @@ public class CategoryController {
         }
     }
 
-
     @PutMapping(value = "/update")
     public ResponseEntity updateCategory(@RequestBody CategoryDTO category) throws Exception {
         return ResponseEntity.ok(service.update(category));
@@ -34,8 +33,8 @@ public class CategoryController {
         return ResponseEntity.ok(service.delete(id));
     }
 
-    @GetMapping(value = "/get")
-    public ResponseEntity searchCategory(@RequestParam Integer id) throws Exception {
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity searchCategory(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(service.get(id));
     }
 

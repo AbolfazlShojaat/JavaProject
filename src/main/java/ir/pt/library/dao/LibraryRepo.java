@@ -10,13 +10,15 @@ public interface LibraryRepo {
 
     LibraryEntity create(LibraryEntity entity);
 
+    LibraryEntity get(Integer id);
+
     List<LibraryEntity> isBorrowAble();
 
     List<LibraryEntity> getAllLibrary();
 
     Integer checkExistNum(Integer id);
 
-    LibraryEntity updateReceive(LibraryEntity entity);
+    LibraryEntity updateReceive(Integer id) throws Exception;
 
-    LibraryEntity updateReturn(LibraryEntity entity);
+    LibraryEntity updateReturn(Integer id) throws Exception;
 }

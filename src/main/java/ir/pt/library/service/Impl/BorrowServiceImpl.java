@@ -2,11 +2,13 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.dao.BookRepo;
 import ir.pt.library.dao.BorrowRepo;
+import ir.pt.library.dao.LibraryRepo;
 import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.BorrowEntity;
 import ir.pt.library.entity.Person;
 import ir.pt.library.mapper.BorrowConverter;
 import ir.pt.library.model.BorrowDTO;
+import ir.pt.library.model.LibraryDTO;
 import ir.pt.library.service.BorrowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,19 @@ public class BorrowServiceImpl implements BorrowService {
     private PersonRepo personRepo;
     @Autowired
     private BookRepo bookRepo;
+    @Autowired
+    private LibraryRepo libraryRepo;
 
     @Override
     public Boolean findNameExists(String categoryName) throws Exception {
+//        LibraryDTO libraryDTO = new LibraryDTO();
+//        if (!this.libraryRepo.isBorrowAble() == true)
+        return true;
+    }
+
+    @Transactional
+    @Override
+    public Boolean lendingBooks(BorrowDTO model) throws Exception {
         return null;
     }
 
@@ -56,8 +68,8 @@ public class BorrowServiceImpl implements BorrowService {
     }
 
     @Override
-    public List<BorrowDTO> getAllBorrowPerson(Person person) {
-        List<BorrowEntity> entities = borrowRepo.getAllBorrowPerson(person);
+    public List<BorrowDTO> getAllBorrowPerson(Integer id) {
+        List<BorrowEntity> entities = borrowRepo.getAllBorrowPerson(id);
         return converter.convertToModels(entities);
 
     }
