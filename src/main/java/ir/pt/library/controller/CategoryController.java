@@ -23,7 +23,6 @@ public class CategoryController {
         }
     }
 
-
     @PutMapping(value = "/update")
     public ResponseEntity updateCategory(@RequestBody CategoryDTO category) throws Exception {
         return ResponseEntity.ok(service.update(category));

@@ -1,5 +1,6 @@
 package ir.pt.library.controller;
 
+import ir.pt.library.model.BorrowDTO;
 import ir.pt.library.model.LibraryDTO;
 import ir.pt.library.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,27 @@ public class LibraryController {
         return ResponseEntity.ok().body(libraryService.create(model));
     }
 
-    @PutMapping(value = "/updateReceive")
-    public ResponseEntity updateReceive(@RequestBody LibraryDTO model) throws Exception {
-        return ResponseEntity.ok(libraryService.updateWithReceive(model));
+    @PutMapping(value = "/updateReceive/{id}")
+    public ResponseEntity updateReceive(@PathVariable Integer id) throws Exception {
+        try {
+            return ResponseEntity.ok(libraryService.updateWithReceive(id));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 
-    @PutMapping(value = "/updateReturn")
-    public ResponseEntity updateReturn(@RequestBody LibraryDTO model) throws Exception {
-        return ResponseEntity.ok(libraryService.updateWithReturn(model));
+    @PutMapping(value = "/updateReturn/{id}")
+    public ResponseEntity updateReturn(@PathVariable Integer id) throws Exception {
+        try {
+            return ResponseEntity.ok(libraryService.updateWithReturn(id));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/lendingBooks")
+    public ResponseEntity BarrowBook (@RequestBody BorrowDTO borrowDTO) throws Exception{
+        return  ResponseEntity.ok(libraryService.lendingBooks(borrowDTO));
     }
 
     @GetMapping(value = "/loanable/{idbook}")

@@ -18,7 +18,7 @@ public interface LibraryRepo {
 
     Integer checkExistNum(Integer id);
 
-    LibraryEntity updateReceive(LibraryEntity entity);
+    LibraryEntity updateReceive(Integer id) throws Exception;
 
-    LibraryEntity updateReturn(LibraryEntity entity);
+    LibraryEntity updateReturn(Integer id) throws Exception;
 }

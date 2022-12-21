@@ -27,27 +27,51 @@ public class LibraryRepoImpl implements LibraryRepo {
         return entity;
     }
 
+    //دریافت کتاب
     @Override
-    public LibraryEntity updateReceive(LibraryEntity entity) {
+    public LibraryEntity updateReceive(Integer id) throws Exception {
+        LibraryEntity entity = get(id);
+        int exist = entity.getExistNum() - 1;
         int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
-                " where l.id= :code")
-                .setParameter("code", entity.getId())
-                .setParameter("existNum", entity.getExistNum() + 1)
+                " where l.book.id= :id")
+                .setParameter("id", id)
+                .setParameter("existNum", exist)
                 .executeUpdate();
-
-        return em.find(LibraryEntity.class, entity.getId());
+        entity.setExistNum(exist);
+        return entity;
     }
 
+    //قرض دادن کتاب
     @Override
-    public LibraryEntity updateReturn(LibraryEntity entity) {
-        int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
-                " where l.id= :code")
-                .setParameter("code", entity.getId())
-                .setParameter("existNum", entity.getExistNum() - 1)
-                .executeUpdate();
-
-        return em.find(LibraryEntity.class, entity.getId());
+    public LibraryEntity updateReturn(Integer id) throws Exception {
+        LibraryEntity entity = get(id);
+        if (entity.getExistNum() > 0) {
+            int exist = entity.getExistNum() + 1;
+            int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
+                    " where l.book.id= :id")
+                    .setParameter("id", id)
+                    .setParameter("existNum", exist)
+                    .executeUpdate();
+            entity.setExistNum(exist);
+            return entity;
+        } else
+            throw new Exception("This book is not available");
     }
+
+//    @Override
+//    public LibraryEntity updateReturn(Integer id) throws Exception {
+//        LibraryEntity entity = get(id);
+//        if (entity.getExistNum() > 0) {
+//            int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
+//                    " where l.book.id= :id")
+//                    .setParameter("id", id)
+//                    .setParameter("existNum", entity.getExistNum() - 1)
+//                    .executeUpdate();
+//            return em.find(LibraryEntity.class, entity.getId());
+//        }
+//        else
+//            throw new Exception("This book is not available");
+//    }
 
     @Override
     public List<LibraryEntity> isBorrowAble() {
