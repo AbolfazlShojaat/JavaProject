@@ -2,10 +2,12 @@ package ir.pt.library.mapper;
 
 import ir.pt.library.entity.Category;
 import ir.pt.library.model.CategoryDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CategoryConverter {
 
     public Category convertToEntity(CategoryDTO model) {

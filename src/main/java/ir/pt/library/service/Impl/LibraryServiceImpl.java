@@ -9,6 +9,7 @@ import ir.pt.library.model.BorrowDTO;
 import ir.pt.library.model.LibraryDTO;
 import ir.pt.library.model.PersonDTO;
 import ir.pt.library.model.PersonModel;
+import ir.pt.library.service.BorrowService;
 import ir.pt.library.service.LibraryService;
 import ir.pt.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class LibraryServiceImpl implements LibraryService {
     private PersonService personService;
     @Autowired
     private PersonConverter personConverter;
-
+    @Autowired
+    private BorrowService borrowService;
 
     // چک میکند که کتاب قابل قرض دادن است و این نوع کتاب را در کتاب خانه داریم یا نه
     @Override
@@ -86,7 +88,7 @@ public class LibraryServiceImpl implements LibraryService {
 
     @Transactional
     @Override
-    public boolean lendingBooks(BorrowDTO borrowDTO) throws Exception {
+    public BorrowDTO lendingBooks(BorrowDTO borrowDTO) throws Exception {
         if (!this.loanable(borrowDTO.getBook().getId()))
             //بررسی قابل قرض دادن بودن کتاب
             throw new Exception("This book cannot be borrowed");
@@ -99,9 +101,31 @@ public class LibraryServiceImpl implements LibraryService {
             borrowDTO.setPerson(personDTO);
             borrowDTO.setReceiveDate(new Date());
             borrowDTO.setRejDate(new Date());
+            BorrowDTO dto = borrowService.create(borrowDTO);
+
         }
 
-        return true;
+        return borrowDTO;
+    }
+
+    @Transactional
+    @Override
+    public BorrowDTO Returnbook(BorrowDTO borrowDTO) throws Exception {
+        if (!this.loanable(borrowDTO.getBook().getId()))
+            //بررسی قابل قرض دادن بودن کتاب
+            throw new Exception("This book cannot be borrowed");
+        else {
+            //قرض دادن کتاب
+            LibraryDTO libraryDTO = updateWithReturn(borrowDTO.getBook().getId());
+            PersonModel personModel = personService.get(borrowDTO.getPerson().getId());
+            PersonDTO personDTO = personConverter.convertToDto(personModel);
+            borrowDTO.setBook(libraryDTO.getBook());
+            borrowDTO.setPerson(personDTO);
+            borrowDTO.setRejDate(new Date());
+            BorrowDTO dto = borrowService.create(borrowDTO);
+        }
+
+        return borrowDTO;
     }
 
     @Override
@@ -114,10 +138,10 @@ public class LibraryServiceImpl implements LibraryService {
         return null;
     }
 
+    @Transactional
     @Override
     public List<LibraryDTO> getAll() {
         return converter.convertToModels((List) libraryRepo.getAllLibrary());
-
     }
 
     @Override

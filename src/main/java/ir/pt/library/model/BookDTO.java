@@ -1,9 +1,5 @@
 package ir.pt.library.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
-import java.io.File;
 import java.util.Date;
 
 public class BookDTO {
@@ -12,8 +8,8 @@ public class BookDTO {
     private int shabak;
     private Date printData;
     private CategoryDTO category;
-    @NotNull
-    private MultipartFile cover;
+    private byte[] cover;
+    private byte[] file;
 
 
     public BookDTO() {
@@ -32,6 +28,25 @@ public class BookDTO {
         this.shabak = shabak;
         this.printData = printData;
         this.category = category;
+    }
+
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.cover = cover;
+    }
+
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover, byte[] file) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.cover = cover;
+        this.file = file;
     }
 
     public int getId() {
@@ -72,5 +87,21 @@ public class BookDTO {
 
     public void setPrintData(Date printData) {
         this.printData = printData;
+    }
+
+    public byte[] getCover() {
+        return cover;
+    }
+
+    public void setCover(byte[] cover) {
+        this.cover = cover;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }

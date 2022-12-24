@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BorrowService {
 
-    Boolean lendingBooks(BorrowDTO model) throws Exception;
+//    Boolean lendingBooks(BorrowDTO model) throws Exception;
 
     Boolean findNameExists(String categoryName) throws Exception;
 

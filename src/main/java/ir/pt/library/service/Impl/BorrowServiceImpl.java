@@ -37,16 +37,16 @@ public class BorrowServiceImpl implements BorrowService {
         return true;
     }
 
-    @Transactional
-    @Override
-    public Boolean lendingBooks(BorrowDTO model) throws Exception {
-        return null;
-    }
+//    @Transactional
+//    @Override
+//    public Boolean lendingBooks(BorrowDTO model) throws Exception {
+//        return null;
+//    }
 
     @Transactional
     @Override
     public BorrowDTO create(BorrowDTO model) throws Exception {
-        BorrowEntity entity= converter.convertToEntity(model);
+        BorrowEntity entity = converter.convertToEntity(model);
         entity.setPerson(personRepo.get(model.getPerson().getId()));
         entity.setBook(bookRepo.getById(model.getBook().getId()));
         return converter.convertToModel(borrowRepo.create(entity));
@@ -67,6 +67,7 @@ public class BorrowServiceImpl implements BorrowService {
         return null;
     }
 
+    @Transactional
     @Override
     public List<BorrowDTO> getAllBorrowPerson(Integer id) {
         List<BorrowEntity> entities = borrowRepo.getAllBorrowPerson(id);

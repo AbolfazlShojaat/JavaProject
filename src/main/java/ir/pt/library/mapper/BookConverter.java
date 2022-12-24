@@ -4,10 +4,12 @@ import ir.pt.library.entity.Book;
 import ir.pt.library.entity.Category;
 import ir.pt.library.model.BookDTO;
 import ir.pt.library.model.CategoryDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BookConverter {
     public Book convertToEntity(BookDTO model) {
         Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
@@ -25,7 +27,7 @@ public class BookConverter {
     public BookDTO convertToModel(Book entity) {
         Category category = new Category(entity.getCategory().getId(), entity.getCategory().getName());
         return new BookDTO(entity.getId(), entity.getName(), entity.getShabak(),
-                entity.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
+                entity.getPrintData(), new CategoryDTO(category.getId(), category.getName()) , entity.getCover() , entity.getFile());
     }
 
     public List<BookDTO> convertToModel(List<Book> entities) {
