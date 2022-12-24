@@ -1,13 +1,21 @@
 package ir.pt.library.entity;
 
 import ir.pt.library.model.CategoryDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Builder
 @Entity
 @Table(schema = "shojaat", name = "Book")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_book")
@@ -26,8 +34,9 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BorrowEntity> borrowEntities;
 
-    public Book() {
-    }
+    @Column
+    @Lob
+    private byte[] cover;
 
     public Book(int id, String name, int shabak, Date printData, Category category) {
         this.id = id;
@@ -37,67 +46,4 @@ public class Book {
         this.category = category;
     }
 
-    public Book(String name, int shabak, Date printData, Category category) {
-        this.name = name;
-        this.shabak = shabak;
-        this.printData = printData;
-        this.category = category;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public int getShabak() {
-        return shabak;
-    }
-
-    public void setShabak(int shabak) {
-        this.shabak = shabak;
-    }
-
-    public Date getPrintData() {
-        return printData;
-    }
-
-    public void setPrintData(Date printData) {
-        this.printData = printData;
-    }
-
-    public List<LibraryEntity> getLibraryEntities() {
-        return libraryEntities;
-    }
-
-    public void setLibraryEntities(List<LibraryEntity> libraryEntities) {
-        this.libraryEntities = libraryEntities;
-    }
-
-    public List<BorrowEntity> getBorrowEntities() {
-        return borrowEntities;
-    }
-
-    public void setBorrowEntities(List<BorrowEntity> borrowEntities) {
-        this.borrowEntities = borrowEntities;
-    }
 }

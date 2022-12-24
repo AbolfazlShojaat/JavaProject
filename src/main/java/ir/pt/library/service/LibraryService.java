@@ -15,7 +15,9 @@ public interface LibraryService {
 
     LibraryDTO create(LibraryDTO model) throws Exception;
 
-    boolean lendingBooks(BorrowDTO borrowDTO) throws Exception;
+    BorrowDTO lendingBooks(BorrowDTO borrowDTO) throws Exception;
+
+    BorrowDTO Returnbook(BorrowDTO borrowDTO) throws Exception;
 
     LibraryDTO updateWithReceive(Integer id) throws Exception;
 

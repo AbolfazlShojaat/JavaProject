@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
 import java.io.IOException;
 
 @RestController
@@ -51,5 +50,9 @@ public class BookController {
     public ResponseEntity uploadBook(@RequestParam("file") MultipartFile file) throws IOException {
         return ResponseEntity.ok().body(file.getBytes());
     }
-}
 
+    @PostMapping("/uploadCover")
+    public ResponseEntity uploadCover(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
+        return ResponseEntity.ok().body(this.bookService.uploadCover(file, book));
+    }
+}

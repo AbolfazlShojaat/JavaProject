@@ -4,10 +4,12 @@ import ir.pt.library.entity.Book;
 import ir.pt.library.entity.Category;
 import ir.pt.library.model.BookDTO;
 import ir.pt.library.model.CategoryDTO;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BookConverter {
     public Book convertToEntity(BookDTO model) {
         Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
