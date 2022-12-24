@@ -9,6 +9,7 @@ public class BookDTO {
     private Date printData;
     private CategoryDTO category;
     private byte[] cover;
+    private byte[] file;
 
 
     public BookDTO() {
@@ -27,6 +28,25 @@ public class BookDTO {
         this.shabak = shabak;
         this.printData = printData;
         this.category = category;
+    }
+
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.cover = cover;
+    }
+
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover, byte[] file) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.cover = cover;
+        this.file = file;
     }
 
     public int getId() {
@@ -75,5 +95,13 @@ public class BookDTO {
 
     public void setCover(byte[] cover) {
         this.cover = cover;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
     }
 }

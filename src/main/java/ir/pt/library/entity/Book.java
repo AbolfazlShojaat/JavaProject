@@ -38,6 +38,10 @@ public class Book {
     @Lob
     private byte[] cover;
 
+    @Column
+    @Lob
+    private byte[] file;
+
     public Book(int id, String name, int shabak, Date printData, Category category) {
         this.id = id;
         this.name = name;

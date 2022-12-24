@@ -27,7 +27,7 @@ public class BookConverter {
     public BookDTO convertToModel(Book entity) {
         Category category = new Category(entity.getCategory().getId(), entity.getCategory().getName());
         return new BookDTO(entity.getId(), entity.getName(), entity.getShabak(),
-                entity.getPrintData(), new CategoryDTO(category.getId(), category.getName()));
+                entity.getPrintData(), new CategoryDTO(category.getId(), category.getName()) , entity.getCover() , entity.getFile());
     }
 
     public List<BookDTO> convertToModel(List<Book> entities) {

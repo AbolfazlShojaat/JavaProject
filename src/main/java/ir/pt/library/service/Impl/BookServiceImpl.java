@@ -63,12 +63,28 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDTO uploadCover(MultipartFile file, BookDTO bookDTO) throws IOException {
         bookDTO.setCover(file.getBytes());
-
         return converter.convertToModel(bookRepo.save(
                 Book.builder()
                         .id(bookDTO.getId())
                         .name(bookDTO.getName())
+                        .shabak(bookDTO.getShabak())
+                        .printData(bookDTO.getPrintData())
                         .cover(bookDTO.getCover())
+                        .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
+                        .build()));
+    }
+
+    @Override
+    public BookDTO uploadFile(MultipartFile file, BookDTO bookDTO) throws IOException {
+        bookDTO.setCover(file.getBytes());
+        return converter.convertToModel(bookRepo.save(
+                Book.builder()
+                        .id(bookDTO.getId())
+                        .name(bookDTO.getName())
+                        .shabak(bookDTO.getShabak())
+                        .printData(bookDTO.getPrintData())
+                        .cover(bookDTO.getCover())
+                        .file(bookDTO.getCover())
                         .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
                         .build()));
     }

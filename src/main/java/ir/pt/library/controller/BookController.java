@@ -46,13 +46,18 @@ public class BookController {
         return ResponseEntity.ok(bookService.delete(id));
     }
 
-    @PostMapping(value = "/upload")
-    public ResponseEntity uploadBook(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok().body(file.getBytes());
-    }
+//    @PostMapping(value = "/upload")
+//    public ResponseEntity uploadBook(@RequestParam("file") MultipartFile file) throws IOException {
+//        return ResponseEntity.ok().body(file.getBytes());
+//    }
 
     @PostMapping("/uploadCover")
     public ResponseEntity uploadCover(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
         return ResponseEntity.ok().body(this.bookService.uploadCover(file, book));
+    }
+
+    @PostMapping("/uploadFile")
+    public ResponseEntity uploadFile(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
+        return ResponseEntity.ok().body(this.bookService.uploadFile(file, book));
     }
 }

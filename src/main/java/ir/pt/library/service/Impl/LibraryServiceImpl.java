@@ -138,10 +138,10 @@ public class LibraryServiceImpl implements LibraryService {
         return null;
     }
 
+    @Transactional
     @Override
     public List<LibraryDTO> getAll() {
         return converter.convertToModels((List) libraryRepo.getAllLibrary());
-
     }
 
     @Override

@@ -21,4 +21,6 @@ public interface BookService {
     List<BookDTO> getAll();
 
     BookDTO uploadCover(MultipartFile file, BookDTO bookDTO) throws IOException;
+
+    BookDTO uploadFile(MultipartFile file, BookDTO bookDTO) throws IOException;
 }
