@@ -2,6 +2,7 @@ package ir.pt.library.controller;
 
 import ir.pt.library.model.BookDTO;
 import ir.pt.library.service.BookService;
+import ir.pt.library.service.DownloadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private DownloadService downloadService;
 
 
     @PostMapping(value = "/add")
@@ -51,13 +54,18 @@ public class BookController {
 //        return ResponseEntity.ok().body(file.getBytes());
 //    }
 
-    @PostMapping("/uploadCover")
-    public ResponseEntity uploadCover(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
-        return ResponseEntity.ok().body(this.bookService.uploadCover(file, book));
+    @PostMapping("/uploadCover&File")
+    public ResponseEntity uploadCover(@RequestPart MultipartFile cover, @RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
+        return ResponseEntity.ok().body(this.bookService.uploadCoverAndFile(cover, file, book));
     }
+//
+//    @PostMapping("/uploadFile")
+//    public ResponseEntity uploadFile(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
+//        return ResponseEntity.ok().body(this.bookService.uploadFile(file, book));
+//    }
 
-    @PostMapping("/uploadFile")
-    public ResponseEntity uploadFile(@RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
-        return ResponseEntity.ok().body(this.bookService.uploadFile(file, book));
+    @GetMapping("/downloadFile")
+    public ResponseEntity getFile(@RequestParam Integer id) {
+        return ResponseEntity.ok().body(this.downloadService.downloadFile(id));
     }
 }

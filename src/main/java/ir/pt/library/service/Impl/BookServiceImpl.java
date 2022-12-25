@@ -8,7 +8,6 @@ import ir.pt.library.model.BookDTO;
 import ir.pt.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -61,8 +60,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO uploadCover(MultipartFile file, BookDTO bookDTO) throws IOException {
-        bookDTO.setCover(file.getBytes());
+    public BookDTO uploadCoverAndFile(MultipartFile bookCover, MultipartFile bookFile, BookDTO bookDTO) throws IOException {
+        bookDTO.setCover(bookCover.getBytes());
+        bookDTO.setFile(bookFile.getBytes());
         return converter.convertToModel(bookRepo.save(
                 Book.builder()
                         .id(bookDTO.getId())
@@ -70,22 +70,23 @@ public class BookServiceImpl implements BookService {
                         .shabak(bookDTO.getShabak())
                         .printData(bookDTO.getPrintData())
                         .cover(bookDTO.getCover())
+                        .file(bookDTO.getFile())
                         .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
                         .build()));
     }
 
-    @Override
-    public BookDTO uploadFile(MultipartFile file, BookDTO bookDTO) throws IOException {
-        bookDTO.setCover(file.getBytes());
-        return converter.convertToModel(bookRepo.save(
-                Book.builder()
-                        .id(bookDTO.getId())
-                        .name(bookDTO.getName())
-                        .shabak(bookDTO.getShabak())
-                        .printData(bookDTO.getPrintData())
-                        .cover(bookDTO.getCover())
-                        .file(bookDTO.getCover())
-                        .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
-                        .build()));
-    }
+//    @Override
+//    public BookDTO uploadFile(MultipartFile fileBook, BookDTO bookDTO) throws IOException {
+//        bookDTO.setFile(fileBook.getBytes());
+//        return converter.convertToModel(bookRepo.save(
+//                Book.builder()
+//                        .id(bookDTO.getId())
+//                        .name(bookDTO.getName())
+//                        .shabak(bookDTO.getShabak())
+//                        .printData(bookDTO.getPrintData())
+//                        .cover(bookDTO.getCover())
+//                        .file(bookDTO.getFile())
+//                        .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
+//                        .build()));
+//    }
 }
