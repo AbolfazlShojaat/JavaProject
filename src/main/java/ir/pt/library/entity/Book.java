@@ -1,6 +1,5 @@
 package ir.pt.library.entity;
 
-import ir.pt.library.model.CategoryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

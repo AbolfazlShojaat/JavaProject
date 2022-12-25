@@ -3,7 +3,6 @@ package ir.pt.library.mapper;
 import ir.pt.library.entity.LibraryEntity;
 import ir.pt.library.model.LibraryDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

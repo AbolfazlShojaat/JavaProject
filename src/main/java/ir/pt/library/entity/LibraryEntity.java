@@ -1,6 +1,5 @@
 package ir.pt.library.entity;
 
-import ir.pt.library.model.BookDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

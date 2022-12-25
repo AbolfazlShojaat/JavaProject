@@ -1,7 +1,5 @@
 package ir.pt.library.service;
 
-import ir.pt.library.entity.LibraryEntity;
-import ir.pt.library.entity.Person;
 import ir.pt.library.model.BorrowDTO;
 
 import java.util.List;
