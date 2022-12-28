@@ -6,6 +6,7 @@ import ir.pt.library.model.CategoryDTO;
 import ir.pt.library.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

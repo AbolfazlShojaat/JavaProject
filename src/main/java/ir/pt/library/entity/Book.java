@@ -38,7 +38,6 @@ public class Book {
 
     @Column
     @Lob
-    @NotNull
     private byte[] cover;
 
     @Column
@@ -53,18 +52,13 @@ public class Book {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", shabak=" + shabak +
-                ", printData=" + printData +
-                ", category=" + category +
-                ", libraryEntities=" + libraryEntities +
-                ", borrowEntities=" + borrowEntities +
-                ", cover=" + Arrays.toString(cover) +
-                ", file=" + Arrays.toString(file) +
-                '}';
+    public Book(int id, String name, int shabak, Date printData, Category category, byte[] cover, byte[] file) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.cover = cover;
+        this.file = file;
     }
 }

@@ -8,6 +8,7 @@ import ir.pt.library.model.BookDTO;
 import ir.pt.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class BookServiceImpl implements BookService {
         return false;
     }
 
+    @Transactional
     @Override
     public BookDTO create(BookDTO model) throws Exception {
         if (!this.findNameExists(model.getName())) {

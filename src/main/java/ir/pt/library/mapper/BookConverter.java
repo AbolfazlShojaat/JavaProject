@@ -13,7 +13,7 @@ import java.util.List;
 public class BookConverter {
     public Book convertToEntity(BookDTO model) {
         Category category = new Category(model.getCategory().getId(), model.getCategory().getName());
-        return new Book(model.getId(),model.getName(), model.getShabak(), model.getPrintData(), category);
+        return new Book(model.getId(),model.getName(), model.getShabak(), model.getPrintData(), category, model.getCover() , model.getFile());
     }
 
     public List<Book> convertToEntity(List<BookDTO> models) {
