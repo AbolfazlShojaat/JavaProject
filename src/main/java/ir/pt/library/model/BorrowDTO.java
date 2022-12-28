@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowDTO {
+    private Integer id;
     private BookDTO book;
     private Date rejDate;
     private PersonDTO person;

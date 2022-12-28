@@ -6,17 +6,13 @@ import java.util.List;
 
 public interface BorrowService {
 
-//    Boolean lendingBooks(BorrowDTO model) throws Exception;
-
-    Boolean findNameExists(String categoryName) throws Exception;
-
     BorrowDTO create(BorrowDTO model) throws Exception;
 
-    BorrowDTO update(BorrowDTO model);
+    BorrowDTO lendingBooks(BorrowDTO borrowDTO) throws Exception;
+
+    boolean Returnbook(Integer id) throws Exception;
 
     boolean delete(Integer id);
-
-    BorrowDTO personGetBorrow(Integer id);
 
     List<BorrowDTO> getAllBorrowPerson(Integer id);
 

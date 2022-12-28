@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +38,7 @@ public class Book {
 
     @Column
     @Lob
+    @NotNull
     private byte[] cover;
 
     @Column
@@ -49,4 +53,18 @@ public class Book {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", shabak=" + shabak +
+                ", printData=" + printData +
+                ", category=" + category +
+                ", libraryEntities=" + libraryEntities +
+                ", borrowEntities=" + borrowEntities +
+                ", cover=" + Arrays.toString(cover) +
+                ", file=" + Arrays.toString(file) +
+                '}';
+    }
 }

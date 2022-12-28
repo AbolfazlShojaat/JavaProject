@@ -11,21 +11,31 @@ import org.springframework.web.bind.annotation.*;
 public class BorrowController {
 
     @Autowired
-    private BorrowService service;
+    private BorrowService borrowService;
 
     @PostMapping(value = "/add")
     public ResponseEntity addPerson(@RequestBody BorrowDTO borrowDTO) throws Exception {
-        return ResponseEntity.ok().body(service.create(borrowDTO));
+        return ResponseEntity.ok().body(borrowService.create(borrowDTO));
     }
 
-    @GetMapping(value = "/getAllPerson")
+    @PostMapping(value = "/lendingBooks")
+    public ResponseEntity BarrowBook (@RequestBody BorrowDTO borrowDTO) throws Exception{
+        return  ResponseEntity.ok(borrowService.lendingBooks(borrowDTO));
+    }
+
+    @DeleteMapping(value = "/returnbooks/{id}")
+    public ResponseEntity Returnbook (@PathVariable Integer id) throws Exception{
+        return  ResponseEntity.ok(borrowService.Returnbook(id));
+    }
+
+    @GetMapping(value = "/getPersonById")
     public ResponseEntity getByPersonId(@RequestParam Integer id) throws Exception {
-        return ResponseEntity.ok(service.getAllBorrowPerson(id));
+        return ResponseEntity.ok(borrowService.getAllBorrowPerson(id));
     }
 
     @GetMapping(value = "/getAll")
     public ResponseEntity getAllBorrow() throws Exception {
-        return ResponseEntity.ok(service.getAllBorrow());
+        return ResponseEntity.ok(borrowService.getAllBorrow());
     }
 
 //    @GetMapping(value = "/get")

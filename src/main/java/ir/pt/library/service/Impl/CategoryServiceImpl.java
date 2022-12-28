@@ -14,7 +14,8 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
-    private CategoryConverter converter = new CategoryConverter();
+    @Autowired
+    private CategoryConverter converter;
 
     public Boolean findNameExists(String categoryName) {
         if (categoryRepo.existsByNameEquals(categoryName)) {

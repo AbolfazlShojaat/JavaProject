@@ -31,21 +31,25 @@ public class LibraryRepoImpl implements LibraryRepo {
     @Override
     public LibraryEntity updateReceive(Integer id) throws Exception {
         LibraryEntity entity = get(id);
-        int exist = entity.getExistNum() - 1;
-        int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
-                " where l.book.id= :id")
-                .setParameter("id", id)
-                .setParameter("existNum", exist)
-                .executeUpdate();
-        entity.setExistNum(exist);
-        return entity;
+        if (entity.getExistNum() > 0) {
+            int exist = entity.getExistNum() - 1;
+            int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
+                    " where l.book.id= :id")
+                    .setParameter("id", id)
+                    .setParameter("existNum", exist)
+                    .executeUpdate();
+            entity.setExistNum(exist);
+            return entity;
+        } else
+            throw new Exception("This book is not available");
+
     }
 
     //قرض دادن کتاب
     @Override
     public LibraryEntity updateReturn(Integer id) throws Exception {
         LibraryEntity entity = get(id);
-        if (entity.getExistNum() > 0) {
+        if (entity.getExistNum() >= 0) {
             int exist = entity.getExistNum() + 1;
             int i = em.createQuery("update LibraryEntity l " + " set l.existNum= : existNum " +
                     " where l.book.id= :id")
@@ -85,7 +89,7 @@ public class LibraryRepoImpl implements LibraryRepo {
     @Override
     public List getAllLibrary() {
         return em.createQuery("from LibraryEntity l")
-        .getResultList();
+                .getResultList();
     }
 
     @Override

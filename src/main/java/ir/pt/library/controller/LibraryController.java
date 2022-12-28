@@ -38,19 +38,20 @@ public class LibraryController {
         }
     }
 
-    @PostMapping(value = "/lendingBooks")
-    public ResponseEntity BarrowBook (@RequestBody BorrowDTO borrowDTO) throws Exception{
-        return  ResponseEntity.ok(libraryService.lendingBooks(borrowDTO));
-    }
-
-    @PostMapping(value = "/Returnbooks")
-    public ResponseEntity Returnbook (@RequestBody BorrowDTO borrowDTO) throws Exception{
-        return  ResponseEntity.ok(libraryService.Returnbook(borrowDTO));
-    }
+//    @PostMapping(value = "/lendingBooks")
+//    public ResponseEntity BarrowBook (@RequestBody BorrowDTO borrowDTO) throws Exception{
+//        return  ResponseEntity.ok(libraryService.lendingBooks(borrowDTO));
+//    }
+//
+//    @PostMapping(value = "/Returnbooks")
+//    public ResponseEntity Returnbook (@RequestBody BorrowDTO borrowDTO) throws Exception{
+//        return  ResponseEntity.ok(libraryService.Returnbook(borrowDTO));
+//    }
 
     @GetMapping(value = "/loanable/{idbook}")
     public ResponseEntity loanable(@PathVariable Integer idbook) {
-        return ResponseEntity.ok(libraryService.loanable(idbook));
+        return ResponseEntity.ok(libraryService.
+                loanable(idbook));
     }
 
     @GetMapping(value = "/check")
