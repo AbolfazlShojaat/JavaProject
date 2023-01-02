@@ -2,6 +2,7 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.dao.BookRepo;
 import ir.pt.library.dao.BorrowRepo;
+import ir.pt.library.dao.BorrowRepo2;
 import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.BorrowEntity;
 import ir.pt.library.mapper.BorrowConverter;
@@ -14,6 +15,9 @@ import ir.pt.library.service.BorrowService;
 import ir.pt.library.service.LibraryService;
 import ir.pt.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +41,8 @@ public class BorrowServiceImpl implements BorrowService {
     private BookRepo bookRepo;
     @Autowired
     private LibraryService libraryService;
+    @Autowired
+    private BorrowRepo2 borrowRepo2;
 
     @Transactional
     @Override
@@ -94,4 +100,12 @@ public class BorrowServiceImpl implements BorrowService {
     public List<BorrowDTO> getAllBorrow() {
         return converter.convertToModels((List) borrowRepo.getAllBorrow());
     }
+
+
+    @Override
+    public List<BorrowDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field) {
+        Page<BorrowEntity> page = borrowRepo2.findAll(PageRequest.of(pageNumber, pageSize).withSort(Sort.by(field)));
+        return converter.convertToModels(page.toList());
+    }
 }
+

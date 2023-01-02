@@ -1,6 +1,7 @@
 package ir.pt.library.service;
 
 import ir.pt.library.model.BookDTO;
+import ir.pt.library.model.ResponseFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -10,7 +11,7 @@ public interface BookService {
 
     Boolean findNameExists(String bookName) throws Exception;
 
-    BookDTO create(BookDTO model) throws Exception;
+    BookDTO create(BookDTO model, String id) throws Exception;
 
     BookDTO update(BookDTO model);
 
@@ -20,7 +21,9 @@ public interface BookService {
 
     List<BookDTO> getAll();
 
-    BookDTO uploadCoverAndFile(MultipartFile bookCover, MultipartFile bookFile, BookDTO bookDTO) throws IOException;
+    BookDTO uploadCover(MultipartFile bookCover, Integer id) throws IOException;
+
+    List<BookDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field);
 
 //    BookDTO uploadFile(MultipartFile fileBook, BookDTO bookDTO) throws IOException;
 }

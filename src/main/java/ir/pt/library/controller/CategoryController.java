@@ -43,4 +43,13 @@ public class CategoryController {
         return ResponseEntity.ok(service.getAll());
     }
 
+//    @GetMapping(value = "/getAllWithSorting/{field}")
+//    public ResponseEntity getAllWithSorting(@PathVariable String field) throws Exception {
+//        return ResponseEntity.ok(service.getAllSorting(field));
+//    }
+
+    @GetMapping(value = "/getAWPAS/{pageNum}/{pageSize}/{field}")
+    public ResponseEntity getAllWithPagination(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String field) throws Exception {
+        return ResponseEntity.ok(service.getAllWithPaginationAndSorting(pageNum, pageSize, field));
+    }
 }

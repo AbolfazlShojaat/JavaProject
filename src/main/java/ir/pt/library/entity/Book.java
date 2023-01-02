@@ -4,11 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +24,7 @@ public class Book {
     private int shabak;
     private Date printData;
 
+
     @ManyToOne
     private Category category;
 
@@ -36,13 +34,16 @@ public class Book {
     @OneToMany(mappedBy = "book")
     private List<BorrowEntity> borrowEntities;
 
+    @OneToOne
+    private FileBook fileBook;
+
     @Column
     @Lob
     private byte[] cover;
 
-    @Column
-    @Lob
-    private byte[] file;
+//    @Column
+//    @Lob
+//    private byte[] file;
 
     public Book(int id, String name, int shabak, Date printData, Category category) {
         this.id = id;
@@ -52,13 +53,23 @@ public class Book {
         this.category = category;
     }
 
-    public Book(int id, String name, int shabak, Date printData, Category category, byte[] cover, byte[] file) {
+    public Book(int id, String name, int shabak, Date printData, Category category, byte[] cover /*, byte[] file*/) {
         this.id = id;
         this.name = name;
         this.shabak = shabak;
         this.printData = printData;
         this.category = category;
         this.cover = cover;
-        this.file = file;
+//        this.file = file;
+    }
+
+    public Book(int id, String name, int shabak, Date printData, Category category, FileBook fileBook, byte[] cover) {
+        this.id = id;
+        this.name = name;
+        this.shabak = shabak;
+        this.printData = printData;
+        this.category = category;
+        this.fileBook = fileBook;
+        this.cover = cover;
     }
 }

@@ -14,18 +14,18 @@ public class BorrowController {
     private BorrowService borrowService;
 
     @PostMapping(value = "/add")
-    public ResponseEntity addPerson(@RequestBody BorrowDTO borrowDTO) throws Exception {
+    public ResponseEntity addBorrow(@RequestBody BorrowDTO borrowDTO) throws Exception {
         return ResponseEntity.ok().body(borrowService.create(borrowDTO));
     }
 
     @PostMapping(value = "/lendingBooks")
-    public ResponseEntity BarrowBook (@RequestBody BorrowDTO borrowDTO) throws Exception{
-        return  ResponseEntity.ok(borrowService.lendingBooks(borrowDTO));
+    public ResponseEntity BarrowBook(@RequestBody BorrowDTO borrowDTO) throws Exception {
+        return ResponseEntity.ok(borrowService.lendingBooks(borrowDTO));
     }
 
     @DeleteMapping(value = "/returnbooks/{id}")
-    public ResponseEntity Returnbook (@PathVariable Integer id) throws Exception{
-        return  ResponseEntity.ok(borrowService.Returnbook(id));
+    public ResponseEntity Returnbook(@PathVariable Integer id) throws Exception {
+        return ResponseEntity.ok(borrowService.Returnbook(id));
     }
 
     @GetMapping(value = "/getPersonById")
@@ -37,6 +37,12 @@ public class BorrowController {
     public ResponseEntity getAllBorrow() throws Exception {
         return ResponseEntity.ok(borrowService.getAllBorrow());
     }
+
+    @GetMapping(value = "/getAWPAS/{pageNum}/{pageSize}/{field}")
+    public ResponseEntity getAllWithPagination(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String field) throws Exception {
+        return ResponseEntity.ok(borrowService.getAllWithPaginationAndSorting(pageNum, pageSize, field));
+    }
+
 
 //    @GetMapping(value = "/get")
 //    public ResponseEntity searchPerson(@RequestParam Integer id) throws Exception {

@@ -11,8 +11,8 @@ public class DownloadServiceImpl implements DownloadService {
     @Autowired
     private BookRepo bookRepo;
 
-    @Override
-    public byte[] downloadFile(Integer id) {
-        return bookRepo.findById(id).get().getFile();
-    }
+//    @Override
+//    public byte[] downloadFile(Integer id) {
+//        return bookRepo.findById(id).get().getFile();
+//    }
 }

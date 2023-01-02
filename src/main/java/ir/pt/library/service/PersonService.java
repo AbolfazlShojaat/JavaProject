@@ -21,4 +21,6 @@ public interface PersonService {
     PersonModel get(Integer id);
 
     List<PersonModel> getAll();
+
+    List<PersonModel> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field);
 }

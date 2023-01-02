@@ -1,12 +1,16 @@
 package ir.pt.library.service.Impl;
 
 import ir.pt.library.dao.PersonRepo;
+import ir.pt.library.dao.PersonRepo2;
 import ir.pt.library.entity.Person;
 import ir.pt.library.mapper.PersonConverter;
 import ir.pt.library.model.PersonDTO;
 import ir.pt.library.model.PersonModel;
 import ir.pt.library.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +22,8 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepo personRepo;
     private PersonConverter converter = new PersonConverter();
+    @Autowired
+    private PersonRepo2 personRepo2;
 
     @Override
     public List<PersonModel> findByNationalCode(String code) {
@@ -66,5 +72,11 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public List<PersonModel> getAll() {
         return converter.convertToModel(personRepo.getAll());
+    }
+
+    @Override
+    public List<PersonModel> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field) {
+        Page<Person> page = personRepo2.findAll(PageRequest.of(pageNumber, pageSize).withSort(Sort.by(field)));
+        return converter.convertToModel(page.toList());
     }
 }
