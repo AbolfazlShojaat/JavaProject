@@ -34,6 +34,15 @@ public class BorrowRepoImpl implements BorrowRepo {
         return entityManager.createQuery("from BorrowEntity b").getResultList();
     }
 
+    //    @Transactional
+//    @Override
+//    public List<BorrowEntity> getAllBorrow() {
+//        return entityManager.createQuery("from BorrowEntity b ORDER BY b.person" , BorrowEntity.class)
+//                .setFirstResult(0)
+//                .setMaxResults(10)
+//                .getResultList();
+//    }
+
     @Override
     public BorrowEntity get(Integer id) {
         BorrowEntity entity = (BorrowEntity)

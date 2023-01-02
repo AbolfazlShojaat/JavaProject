@@ -9,7 +9,8 @@ public class BookDTO {
     private Date printData;
     private CategoryDTO category;
     private byte[] cover;
-    private byte[] file;
+    private ResponseFile fileBook;
+//    private byte[] file;
 
 
     public BookDTO() {
@@ -30,23 +31,24 @@ public class BookDTO {
         this.category = category;
     }
 
-    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover) {
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, ResponseFile fileBook) {
         this.id = id;
         this.name = name;
         this.shabak = shabak;
         this.printData = printData;
         this.category = category;
-        this.cover = cover;
+        this.fileBook = fileBook;
     }
 
-    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover, byte[] file) {
+    public BookDTO(int id, String name, int shabak, Date printData, CategoryDTO category, byte[] cover,
+                   ResponseFile fileBook) {
         this.id = id;
         this.name = name;
         this.shabak = shabak;
         this.printData = printData;
         this.category = category;
         this.cover = cover;
-        this.file = file;
+        this.fileBook = fileBook;
     }
 
     public int getId() {
@@ -97,11 +99,20 @@ public class BookDTO {
         this.cover = cover;
     }
 
-    public byte[] getFile() {
-        return file;
+    public ResponseFile getFileBook() {
+        return fileBook;
     }
 
-    public void setFile(byte[] file) {
-        this.file = file;
+    public void setFileBook(ResponseFile fileBook) {
+        this.fileBook = fileBook;
     }
+
+    //
+//    public byte[] getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(byte[] file) {
+//        this.file = file;
+//    }
 }

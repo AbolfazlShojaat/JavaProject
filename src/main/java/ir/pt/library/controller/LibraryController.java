@@ -64,6 +64,12 @@ public class LibraryController {
         return ResponseEntity.ok().body(libraryService.getAll());
     }
 
+    @GetMapping(value = "/getAWPAS/{pageNum}/{pageSize}/{field}")
+    public ResponseEntity getAllWithPagination(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String field) throws Exception {
+        return ResponseEntity.ok(libraryService.getAllWithPaginationAndSorting(pageNum, pageSize, field));
+    }
+
+
     @GetMapping(value = "/checkExistNum/{id}")
     public ResponseEntity checkExistNum(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(libraryService.checkExistNum(id));

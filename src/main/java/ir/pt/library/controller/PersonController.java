@@ -35,6 +35,11 @@ public class PersonController {
         return ResponseEntity.ok(personService.getAll());
     }
 
+    @GetMapping(value = "/getAWPAS/{pageNum}/{pageSize}/{field}")
+    public ResponseEntity getAllWithPagination(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String field) throws Exception {
+        return ResponseEntity.ok(personService.getAllWithPaginationAndSorting(pageNum, pageSize, field));
+    }
+
     @PutMapping(value = "/update")
     public ResponseEntity updatePerson(@RequestBody PersonDTO person) throws Exception {
         return ResponseEntity.ok(personService.update(person));

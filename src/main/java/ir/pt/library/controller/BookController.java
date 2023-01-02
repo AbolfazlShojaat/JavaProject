@@ -20,10 +20,10 @@ public class BookController {
     private DownloadService downloadService;
 
 
-    @PostMapping(value = "/add")
-    public ResponseEntity addBook(@RequestBody BookDTO book) throws Exception {
+    @PostMapping(value = "/add/{id}")
+    public ResponseEntity addBook(@RequestBody BookDTO book, @PathVariable String id) throws Exception {
         try {
-            return ResponseEntity.ok().body(bookService.create(book));
+            return ResponseEntity.ok().body(bookService.create(book, id));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -39,6 +39,11 @@ public class BookController {
         return ResponseEntity.ok(bookService.getAll());
     }
 
+    @GetMapping(value = "/getAWPAS/{pageNum}/{pageSize}/{field}")
+    public ResponseEntity getAllWithPagination(@PathVariable Integer pageNum, @PathVariable Integer pageSize, @PathVariable String field) throws Exception {
+        return ResponseEntity.ok(bookService.getAllWithPaginationAndSorting(pageNum, pageSize, field));
+    }
+
     @PutMapping(value = "/update")
     public ResponseEntity updateBook(@RequestBody BookDTO book) throws Exception {
         return ResponseEntity.ok(bookService.update(book));
@@ -48,15 +53,14 @@ public class BookController {
     public ResponseEntity deleteBook(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok(bookService.delete(id));
     }
-
 //    @PostMapping(value = "/upload")
 //    public ResponseEntity uploadBook(@RequestParam("file") MultipartFile file) throws IOException {
 //        return ResponseEntity.ok().body(file.getBytes());
 //    }
 
-    @PostMapping("/uploadCover&File")
-    public ResponseEntity uploadCover(@RequestPart MultipartFile cover, @RequestPart MultipartFile file, @RequestPart BookDTO book) throws IOException {
-        return ResponseEntity.ok().body(this.bookService.uploadCoverAndFile(cover, file, book));
+    @PostMapping("/uploadCover/{id}")
+    public ResponseEntity uploadCover(@RequestPart MultipartFile cover, @PathVariable Integer id) throws IOException {
+        return ResponseEntity.ok().body(this.bookService.uploadCover(cover , id));
     }
 //
 //    @PostMapping("/uploadFile")
@@ -64,8 +68,8 @@ public class BookController {
 //        return ResponseEntity.ok().body(this.bookService.uploadFile(file, book));
 //    }
 
-    @GetMapping("/downloadFile")
-    public ResponseEntity getFile(@RequestParam Integer id) {
-        return ResponseEntity.ok().body(this.downloadService.downloadFile(id));
-    }
+//    @GetMapping("/downloadFile")
+//    public ResponseEntity getFile(@RequestParam Integer id) {
+//        return ResponseEntity.ok().body(this.downloadService.downloadFile(id));
+//    }
 }

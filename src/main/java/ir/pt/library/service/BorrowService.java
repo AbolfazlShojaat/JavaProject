@@ -17,4 +17,6 @@ public interface BorrowService {
     List<BorrowDTO> getAllBorrowPerson(Integer id);
 
     List<BorrowDTO> getAllBorrow();
+
+    List<BorrowDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field);
 }

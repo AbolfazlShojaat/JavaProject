@@ -2,11 +2,15 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.dao.BookRepo;
 import ir.pt.library.dao.LibraryRepo;
+import ir.pt.library.dao.LibraryRepo2;
 import ir.pt.library.entity.LibraryEntity;
 import ir.pt.library.mapper.LibraryConverter;
 import ir.pt.library.model.LibraryDTO;
 import ir.pt.library.service.LibraryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +26,8 @@ public class LibraryServiceImpl implements LibraryService {
     private LibraryConverter converter;
     @Autowired
     private BookRepo bookRepo;
+    @Autowired
+    private LibraryRepo2 libraryRepo2;
 
     // چک میکند که کتاب قابل قرض دادن است و این نوع کتاب را در کتاب خانه داریم یا نه
     @Transactional
@@ -130,6 +136,12 @@ public class LibraryServiceImpl implements LibraryService {
     @Override
     public List<LibraryDTO> getAll() {
         return converter.convertToModels((List) libraryRepo.getAllLibrary());
+    }
+
+    @Override
+    public List<LibraryDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field) {
+        Page<LibraryEntity> page = libraryRepo2.findAll(PageRequest.of(pageNumber, pageSize).withSort(Sort.by(field)));
+        return converter.convertToModels(page.toList());
     }
 
     @Override

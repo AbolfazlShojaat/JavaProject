@@ -1,6 +1,9 @@
 package ir.pt.library.dao;
 
 import ir.pt.library.entity.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,4 +26,6 @@ public interface PersonRepo {
     Person get(Integer id);
 
     List<Person> getAll();
+
+    Page<Person> findAll(Pageable pageable);
 }

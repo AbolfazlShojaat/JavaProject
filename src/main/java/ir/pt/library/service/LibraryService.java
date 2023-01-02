@@ -28,5 +28,7 @@ public interface LibraryService {
 
     List<LibraryDTO> getAll();
 
+    List<LibraryDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field);
+
     Integer checkExistNum(Integer id);
 }

@@ -2,11 +2,18 @@ package ir.pt.library.service.Impl;
 
 import ir.pt.library.dao.BookRepo;
 import ir.pt.library.entity.Book;
+import ir.pt.library.entity.FileBook;
 import ir.pt.library.mapper.BookConverter;
 import ir.pt.library.mapper.CategoryConverter;
 import ir.pt.library.model.BookDTO;
+import ir.pt.library.model.ResponseFile;
 import ir.pt.library.service.BookService;
+import ir.pt.library.service.CategoryService;
+import ir.pt.library.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +26,8 @@ public class BookServiceImpl implements BookService {
 
     @Autowired
     private BookRepo bookRepo;
+    @Autowired
+    private FileStorageService fileStorageService;
     @Autowired
     private BookConverter converter;
     @Autowired
@@ -33,15 +42,21 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public BookDTO create(BookDTO model) throws Exception {
+    public BookDTO create(BookDTO model, String id) throws Exception {
         if (!this.findNameExists(model.getName())) {
-            return converter.convertToModel(bookRepo.save(converter.convertToEntity(model)));
+            FileBook fileBook = fileStorageService.getFile(id);
+            ResponseFile responseFile = new ResponseFile(fileBook.getId(), fileBook.getName(), fileBook.getType());
+            model.setFileBook(responseFile);
+            Book book = bookRepo.save(converter.convertToEntity(model));
+//            book.setFileBook(fileBook);
+            return converter.convertToModel(book);
         } else
             throw new Exception("This name exists");
     }
 
     @Override
     public BookDTO update(BookDTO model) {
+
         return converter.convertToModel(bookRepo.save(converter.convertToEntity(model)));
     }
 
@@ -62,21 +77,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDTO uploadCoverAndFile(MultipartFile bookCover, MultipartFile bookFile, BookDTO bookDTO) throws IOException {
-        bookDTO.setCover(bookCover.getBytes());
-        bookDTO.setFile(bookFile.getBytes());
-        return converter.convertToModel(bookRepo.save(
-                Book.builder()
-                        .id(bookDTO.getId())
-                        .name(bookDTO.getName())
-                        .shabak(bookDTO.getShabak())
-                        .printData(bookDTO.getPrintData())
-                        .cover(bookDTO.getCover())
-                        .file(bookDTO.getFile())
-                        .category(categoryConverter.convertToEntity(bookDTO.getCategory()))
-                        .build()));
+    public List<BookDTO> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field) {
+        Page<Book> page = bookRepo.findAll(PageRequest.of(pageNumber, pageSize).withSort(Sort.by(field)));
+        return converter.convertToModel(page.toList());
     }
 
+    @Override
+    public BookDTO uploadCover(MultipartFile bookCover, Integer id) throws IOException {
+        BookDTO bookDTO= get(id);
+        bookDTO.setCover(bookCover.getBytes());
+        Book book = converter.convertToEntity(bookDTO);
+        return converter.convertToModel(bookRepo.save(book));
+    }
 //    @Override
 //    public BookDTO uploadFile(MultipartFile fileBook, BookDTO bookDTO) throws IOException {
 //        bookDTO.setFile(fileBook.getBytes());
