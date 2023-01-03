@@ -2,17 +2,10 @@ package ir.pt.library.dao.repoImpl;
 
 import ir.pt.library.dao.PersonRepo;
 import ir.pt.library.entity.Person;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -89,14 +82,16 @@ public class PersonRepoImpl implements PersonRepo {
     }
 
     @Override
-    public List<Person> getAll() {
-        return entityManager.createQuery("from Person p").getResultList();
+    public Person getByName(String pName) {
+        Person person =
+                (Person) entityManager.createQuery("from Person p" + " " + "where p.firstName=: firstName")
+                        .setParameter("firstName", pName)
+                        .getSingleResult();
+        return person;
     }
 
     @Override
-    public Page<Person> findAll(Pageable pageable) {
-            List<Person> people= (entityManager.createQuery("from Person p")
-                    .getResultList());
-        return new PageImpl<Person>(people);
+    public List<Person> getAll() {
+        return entityManager.createQuery("from Person p").getResultList();
     }
 }

@@ -27,13 +27,13 @@ public class FileBookController {
         String message = "";
         try {
             fileStorageService.save(file);
-
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
+
     }
 
     @GetMapping("/files")
@@ -41,7 +41,7 @@ public class FileBookController {
         List<ResponseFile> files = fileStorageService.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("file/files/")
+                    .path("/file/files/")
                     .path(dbFile.getId())
                     .toUriString();
 
@@ -56,7 +56,7 @@ public class FileBookController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/download/{id}")
+    @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         FileBook file = fileStorageService.getFile(id);
         return ResponseEntity.ok()

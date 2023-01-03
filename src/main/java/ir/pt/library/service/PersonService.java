@@ -20,6 +20,8 @@ public interface PersonService {
 
     PersonModel get(Integer id);
 
+    PersonModel getByName(String pName);
+
     List<PersonModel> getAll();
 
     List<PersonModel> getAllWithPaginationAndSorting(Integer pageNumber, Integer pageSize, String field);
