@@ -30,6 +30,11 @@ public class PersonController {
         return ResponseEntity.ok(personService.get(id));
     }
 
+    @GetMapping(value = "/getByName")
+    public ResponseEntity getByName(@RequestParam String pName) throws Exception {
+        return ResponseEntity.ok(personService.getByName(pName));
+    }
+
     @GetMapping(value = "/getAll")
     public ResponseEntity people() throws Exception {
         return ResponseEntity.ok(personService.getAll());

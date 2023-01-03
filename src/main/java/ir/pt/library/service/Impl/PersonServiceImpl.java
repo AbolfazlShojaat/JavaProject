@@ -70,6 +70,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public PersonModel getByName(String pName) {
+        Person entity = personRepo.getByName(pName);
+        return converter.convertToModel(entity);
+    }
+
+    @Override
     public List<PersonModel> getAll() {
         return converter.convertToModel(personRepo.getAll());
     }
